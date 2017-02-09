@@ -14,7 +14,7 @@ It runs analysis on the data and provides the following Online Reports:
 * Breakdown of Spend by Resident
 * Total Spend by Service
 
-## Documentation
+## Project Documentation
 
 https://github.com/jacksegal/hounslow-madm/wiki
 
@@ -24,4 +24,4 @@ This project was built using the Laravel framework - documentation can be found 
 
 ## License
 
-`License of project` - for example: "The project is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)."
+This project is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
