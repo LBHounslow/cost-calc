@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
                 'name' => 'Jane Doe',
-                'email' => 'jane.done@test.gov.uk',
+                'email' => 'jane.doe@test.gov.uk',
                 'remember_token' => str_random(10),
                 'password' => bcrypt('12345678'),
                 'permissions' => '["uploadFile","reports","clientLookup","settings"]',
