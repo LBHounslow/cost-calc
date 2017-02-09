@@ -1,0 +1,25 @@
+.navbar a.navbar-brand {
+    padding: 0;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+.navbar-default {
+    background-color: #642F6C !important;
+    border-color: #642F6C !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white !important;
+}
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+    color: white !important;
+    background-color: transparent !important;
+}
+
+#user-login-table .deleteButton {
+    cursor: pointer;
+}
