@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
             ->withoutOverlapping();
 
         $schedule->command('migrate:refresh --seed')
-            ->everyMinute()
+            ->daily()
             ->withoutOverlapping();
     }
 
