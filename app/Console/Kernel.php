@@ -27,6 +27,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('import:run')
             ->everyMinute()
             ->withoutOverlapping();
+
+        $schedule->command('migrate:refresh --seed')
+            ->everyMinute()
+            ->withoutOverlapping();
     }
 
     /**
