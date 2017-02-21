@@ -87,9 +87,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="">
                         {{ csrf_field() }}
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <a id="confirmDeleteButton" href="/">
-                            <button type="button" class="btn btn-danger">Delete File Data</button>
-                        </a>
+                        <button type="submit" class="btn btn-danger">Delete File Data</button>
                     </form>
                 </div>
             </div>
