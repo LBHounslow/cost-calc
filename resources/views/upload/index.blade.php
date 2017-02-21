@@ -56,7 +56,7 @@
                     <td>{{ $uploadedFile->created_at }}</td>
                     <td>
                         @if($uploadedFile->deleted === 0 && $uploadedFile->status === 1)
-                            <a class="deleteButton" data-fileid="{{ $uploadedFile->id }}"
+                            <a class="deleteButton" data-href="/upload/destroy/{{ $uploadedFile->id }}"
                                data-toggle="modal"
                                data-target="#confirmDelete">
                                 <i class=" fa fa-trash-o" aria-hidden="true"></i>
@@ -84,10 +84,9 @@
                     <p>This cannot be reversed.</p>
                 </div>
                 <div class="modal-footer">
-                    <form class="form-horizontal" role="form" method="POST" action="/upload/destroy">
+                    <form class="form-horizontal" role="form" method="POST" action="">
                         {{ csrf_field() }}
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <input name="fileid" type="hidden" value="">
                         <a id="confirmDeleteButton" href="/">
                             <button type="button" class="btn btn-danger">Delete File Data</button>
                         </a>
@@ -113,7 +112,8 @@
 
     <script>
         $('#confirmDelete').on('show.bs.modal', function (e) {
-            $(this).find('input[name="fileid"]').attr('value', $(e.relatedTarget).data('fileid'));
+            $(this).find('form').attr('action', $(e.relatedTarget).data('href'));
+            //$(this).find('#confirmDeleteButton button').attr('href', $(e.relatedTarget).data('href'));
         });
 
     </script>
