@@ -71,15 +71,8 @@
 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
-
-                <button type="submit" class="btn btn-primary">
-                    Create
-                </button>
-
-                <a href="/users">
-                    <button type="button" class="btn btn-default">Cancel</button>
-                </a>
-
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a href="/users" class="btn btn-default" role="button">Cancel</a>
             </div>
         </div>
     </form>

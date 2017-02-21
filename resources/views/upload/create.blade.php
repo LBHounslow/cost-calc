@@ -35,15 +35,8 @@
 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
-
-                <button type="submit" class="btn btn-primary">
-                    Upload
-                </button>
-
-                <a href="/uploads">
-                    <button type="button" class="btn btn-default">Cancel</button>
-                </a>
-
+                <button type="submit" class="btn btn-primary">Upload</button>
+                <a href="/uploads" class="btn btn-default" role="button">Cancel</a>
             </div>
         </div>
     </form>
