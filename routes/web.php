@@ -27,7 +27,7 @@ Route::get('/settings/login-logs', 'SettingsController@getUserLoginLogs')->middl
 Route::get('/uploads', 'UploadController@index')->middleware('permission:uploadFile');
 Route::get('/upload/create', 'UploadController@create')->middleware('permission:uploadFile');
 Route::post('/upload/store', 'UploadController@store')->middleware('permission:uploadFile');
-Route::get('/upload/destroy/{file}', 'UploadController@destroy')->middleware('permission:uploadFile');
+Route::post('/upload/destroy/{file}', 'UploadController@destroy')->middleware('permission:uploadFile');
 
 Route::get('/clients', 'ClientController@index')->middleware('permission:clientLookup');
 Route::get('/client/{client}', 'ClientController@show')->middleware('permission:clientLookup');
