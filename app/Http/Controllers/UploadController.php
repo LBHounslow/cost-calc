@@ -71,7 +71,7 @@ class UploadController extends Controller
 
         //event(new UploadFile($uploadedFile));
 
-        flash('File successfully uploaded');
+        flash('File successfully uploaded - it will be processed in the background - please refresh the page in about 5 mins');
         return Redirect::to('/uploads');
     }
 
