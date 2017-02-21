@@ -62,7 +62,7 @@
             <label for="active" class="col-md-4 control-label">Status</label>
 
             <div class="col-md-6">
-                <input id="active" type="checkbox" class="form-control" name="active" value="1"
+                <input style="width: 20px;" id="active" type="checkbox" class="form-control" name="active" value="1"
                        @if ($user->active === 1) checked @endif >
             </div>
         </div>
