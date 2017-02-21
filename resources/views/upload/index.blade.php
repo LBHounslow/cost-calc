@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('title')
-    Uploaded File Log
+    Upload File
 @endsection
 
 @section('content')
