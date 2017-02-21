@@ -7,7 +7,7 @@
 @section('content')
     <form id="clientForm" class="form-inline" role="form" method="GET" action="/client/$clientId">
         <div class="form-group">
-            <label for="clientId">Client Id</label>
+            <label for="clientId">Client ID</label>
             <input type="text" class="form-control" id="clientId" required>
         </div>
         <button id="clientSubmit" type="submit" class="btn btn-default">Get Details</button>
