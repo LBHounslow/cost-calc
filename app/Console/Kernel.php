@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\ImportFile::class,
+        Commands\DeleteFiles::class,
     ];
 
     /**
@@ -29,6 +30,10 @@ class Kernel extends ConsoleKernel
             ->withoutOverlapping();
 
         $schedule->command('migrate:refresh --seed')
+            ->daily()
+            ->withoutOverlapping();
+
+        $schedule->command('uploads:delete')
             ->daily()
             ->withoutOverlapping();
     }
