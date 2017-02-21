@@ -42,7 +42,7 @@
     </div>
 
     <a href="/user/create">
-        <button class="btn btn-primary">Add User</button>
+        <button class="btn btn-primary">Create New User</button>
     </a>
 
 @stop
