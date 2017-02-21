@@ -36,7 +36,7 @@
                 <input type="radio" name="tempFilter" id="inlineRadio3" value="3"> Not Temp Accom
             </label>
         </div>
-        <button type="button" id="total-spend-btn" class="btn btn-primary">Submit</button>
+        <button type="button" id="total-spend-btn" class="btn btn-primary">Apply Filter</button>
     </form>
 
     <hr>
