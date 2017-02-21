@@ -40,7 +40,7 @@
                     Upload
                 </button>
 
-                <a href="/">
+                <a href="/uploads">
                     <button type="button" class="btn btn-default">Cancel</button>
                 </a>
 
