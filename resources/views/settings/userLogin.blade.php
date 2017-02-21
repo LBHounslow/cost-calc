@@ -20,7 +20,7 @@
             <th data-field="user_id" data-sortable="true">User Id</th>
             <th data-field="login_user_name" data-sortable="true">Username</th>
             <th data-field="login_user_email" data-sortable="true">Email</th>
-            <th data-field="login_client_ip" data-sortable="true">IP Adress</th>
+            <th data-field="login_client_ip" data-sortable="true">IP Address</th>
             <th data-field="created_at" data-sortable="true">Date</th>
         </tr>
         </thead>
