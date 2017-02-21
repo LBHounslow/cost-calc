@@ -46,6 +46,7 @@
 @section('footerScripts')
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="/js/tableExport.js"></script>
     <script>
         $('#user-login-table').bootstrapTable({
             exportDataType: 'all',
