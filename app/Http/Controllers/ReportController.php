@@ -55,10 +55,10 @@ class ReportController extends Controller
             $whereClause .= " AND 1 = 1";
         } elseif (isset($request) && $request->input('tempFilter') === '2') {
             // only temp
-            $whereClause .= " AND id IN (select id from import_housing_temp_accom)";
+            $whereClause .= " AND id IN (select client_id from import_housing_temp_accom)";
         } elseif (isset($request) && $request->input('tempFilter') === '3') {
             // not temp
-            $whereClause .= " AND id NOT IN (select id from import_housing_temp_accom)";
+            $whereClause .= " AND id NOT IN (select client_id from import_housing_temp_accom)";
         } else {
             $whereClause .= " AND 2 = 2";
         }
