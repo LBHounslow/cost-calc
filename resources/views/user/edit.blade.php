@@ -63,7 +63,7 @@
 
             <div class="col-md-6">
                 <input style="width: 20px;" id="active" type="checkbox" class="form-control" name="active" value="1"
-                       @if ($user->active == '1') checked @endif >
+                       @if ($user->active == 1) checked @endif >
             </div>
         </div>
 
