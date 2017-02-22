@@ -36,9 +36,9 @@
         @foreach ($uploadedFiles as $uploadedFile)
 
 
-            @if($uploadedFile->status === '0' || $uploadedFile->deleted === '1')
+            @if($uploadedFile->status == '0' || $uploadedFile->deleted == '1')
                 <tr class="danger">
-            @elseif($uploadedFile->status === '1')
+            @elseif($uploadedFile->status == '1')
                 <tr class="success">
             @else
                 <tr>
@@ -55,7 +55,7 @@
                     <td>{{ $uploadedFile->error_msg }}</td>
                     <td>{{ $uploadedFile->created_at }}</td>
                     <td>
-                        @if($uploadedFile->deleted === '0' && $uploadedFile->status === '1')
+                        @if($uploadedFile->deleted == '0' && $uploadedFile->status == '1')
                             <a class="deleteButton" data-href="/upload/destroy/{{ $uploadedFile->id }}"
                                data-toggle="modal"
                                data-target="#confirmDelete">
