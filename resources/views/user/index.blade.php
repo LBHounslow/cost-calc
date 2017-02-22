@@ -25,7 +25,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->provider->display_name }}</td>
-                    <td>@if($user->active === 1) <span class="label label-success">Active</span> @else <span
+                    <td>@if($user->active === '1') <span class="label label-success">Active</span> @else <span
                                 class="label label-danger">Suspended</span> @endif</td>
                     <td>
                         <a href="/user/{{ $user->id }}/edit">
