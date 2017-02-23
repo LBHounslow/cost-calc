@@ -51,7 +51,16 @@
                     <td>{{ $uploadedFile->filetype }}</td>
                     <td>{{ $uploadedFile->user_id }}</td>
                     <td>{{ $uploadedFile->processed }}</td>
-                    <td>{{ $uploadedFile->status }}</td>
+                    <td>
+                        @if($uploadedFile->processed == '0')
+                            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Processing...
+                        @elseif($uploadedFile->status == '1')
+                            Success
+                        @elseif($uploadedFile->status == '0')
+                            Error
+                        @endif
+
+                    </td>
                     <td>{{ $uploadedFile->error_msg }}</td>
                     <td>{{ $uploadedFile->created_at }}</td>
                     <td>
