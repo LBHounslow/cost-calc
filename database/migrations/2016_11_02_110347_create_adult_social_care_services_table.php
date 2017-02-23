@@ -17,7 +17,7 @@ class CreateAdultSocialCareServicesTable extends Migration
             $table->increments('id');
             $table->integer('client_id')->nullable();
             $table->integer('upload_id');
-            $table->integer('asc_id')->nullable();
+            $table->string('asc_id', 200)->nullable();
             $table->string('address_1', 200)->nullable();
             $table->string('address_2', 200)->nullable();
             $table->string('address_3', 200)->nullable();
