@@ -20,14 +20,14 @@
            data-show-columns="true">
         <thead>
         <tr>
-            <th data-field="id" data-sortable="true">File Id</th>
+            <th data-field="id" data-sortable="true" data-visible="false">File Id</th>
             <th data-field="original_filename" data-sortable="true">Filename</th>
             <th data-field="path" data-sortable="true" data-visible="false">Path</th>
             <th data-field="filetype" data-sortable="true">Filetype</th>
             <th data-field="user_id" data-sortable="true" data-visible="false">User Id</th>
             <th data-field="processed" data-sortable="true" data-visible="false">Processed</th>
             <th data-field="status" data-sortable="true">Status</th>
-            <th data-width="40px" data-field="error_msg" data-sortable="true">Error Message</th>
+            <th data-width="40px" data-field="error_msg" data-sortable="true" data-visible="false">Error Message</th>
             <th data-field="created_at" data-sortable="true">Date</th>
             <th data-sortable="true">Delete</th>
         </tr>
@@ -59,7 +59,7 @@
                         @elseif($uploadedFile->status == '1')
                             Success
                         @elseif($uploadedFile->status == '0')
-                            Error
+                            <a onclick="showErrorMsgColumn()" style="cursor: pointer">Error</a>
                         @endif
 
                     </td>
@@ -122,9 +122,13 @@
     <script>
         $('#confirmDelete').on('show.bs.modal', function (e) {
             $(this).find('form').attr('action', $(e.relatedTarget).data('href'));
-            //$(this).find('#confirmDeleteButton button').attr('href', $(e.relatedTarget).data('href'));
         });
+    </script>
 
+    <script>
+        function showErrorMsgColumn() {
+            $('#user-login-table').bootstrapTable('showColumn', 'error_msg');
+        }
     </script>
 
 @endsection
