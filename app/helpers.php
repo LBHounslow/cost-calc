@@ -5,6 +5,14 @@ function flash($message)
     session()->flash('flash_message', $message);
 }
 
+
+function pre($string)
+{
+    echo '<pre>';
+    print_r($string);
+    echo '</pre>';
+}
+
 function slack($errstr)
 {
 

@@ -23,6 +23,7 @@ Route::post('/user/store', 'UserController@store')->middleware('permission:setti
 
 Route::get('/settings', 'SettingsController@index')->middleware('permission:settings');
 Route::get('/settings/login-logs', 'SettingsController@getUserLoginLogs')->middleware('permission:settings');
+Route::get('/settings/change-logs', 'SettingsController@getUserChangeLogs')->middleware('permission:settings');
 
 Route::get('/uploads', 'UploadController@index')->middleware('permission:uploadFile');
 Route::get('/upload/create', 'UploadController@create')->middleware('permission:uploadFile');

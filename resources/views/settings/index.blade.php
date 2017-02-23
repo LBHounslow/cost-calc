@@ -16,6 +16,10 @@
             <i class="fa fa-sign-in"></i> User Login Log
         </a>
 
+        <a class="btn btn-default" href="/settings/change-logs" role="button" style="text-align:left;">
+            <i class="fa fa-sign-in"></i> User Change Log
+        </a>
+
     </div>
 
 @stop

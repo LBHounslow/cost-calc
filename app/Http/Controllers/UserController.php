@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use App\User;
+use App\User_change_log;
 use View;
 use App\Provider;
 use App\Permission;
@@ -124,6 +125,14 @@ class UserController extends Controller
         ]);
 
         $user = User::find($id);
+        $oldUser = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'provider_code' => $user->provider_code,
+            'permissions' => $user->permissions,
+            'active' => $user->active,
+
+        ];
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->provider_code = $request->input('provider');
@@ -136,6 +145,24 @@ class UserController extends Controller
         }
 
         $user->save();
+
+        $newUser = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'provider_code' => $request->input('provider'),
+            'permissions' => json_encode($request->input('permissions')),
+            'active' => $user->active,
+
+        ];
+
+        $userChange = new User_change_log();
+        $userChange->create([
+            'from' => json_encode($oldUser),
+            'to' => json_encode($newUser),
+            'user_id' => $user->id,
+            'change_user_id' => \Auth::user()->id,
+        ]);
+
 
         flash('User successfully updated');
 

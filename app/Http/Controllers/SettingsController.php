@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User_login_log;
+use App\User_change_log;
 use View;
 use App\Http\Requests;
 
@@ -19,5 +20,12 @@ class SettingsController extends Controller
         $userLoginRequests = User_login_log::orderBy('id', 'desc')->get();
 
         return View::make('settings/userLogin', ['userLoginRequests' => $userLoginRequests]);
+    }
+
+    public function getUserChangeLogs()
+    {
+        $userChanges = User_change_log::orderBy('id', 'desc')->get();
+
+        return View::make('settings/userChange', ['userChanges' => $userChanges]);
     }
 }
