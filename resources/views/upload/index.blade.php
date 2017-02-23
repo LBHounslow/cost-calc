@@ -53,7 +53,7 @@
                     <td>{{ $uploadedFile->processed }}</td>
                     <td>
                         @if($uploadedFile->processed == '0')
-                            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Processing...
+                            <img src="/img/spin.gif" width="22px"> Processing...
                         @elseif($uploadedFile->deleted == 1)
                             Deleted
                         @elseif($uploadedFile->status == '1')
