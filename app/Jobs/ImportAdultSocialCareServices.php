@@ -55,7 +55,15 @@ class ImportAdultSocialCareServices implements ShouldQueue
                     }
                 }
 
-                if ($emptyRow == false) {
+                $mandatoryColumns = [
+                    'postcode',
+                    'dob',
+                    'surname',
+                    'start',
+                    'servicetype',
+                ];
+
+                if ($this->checkMandatoryColumns($mandatoryColumns, $row) && $emptyRow === false) {
 
                     /* if end date is empty, set compare to today */
                     if (empty($row['end'])) {
@@ -88,24 +96,24 @@ class ImportAdultSocialCareServices implements ShouldQueue
                     /* create the record */
                     AdultSocialCareServices::create([
                         'upload_id' => $fileId,
-                        'asc_id' => $row['ascid'],
-                        'address_1' => $row['address1'],
-                        'address_2' => $row['address2'],
-                        'address_3' => $row['address3'],
-                        'town' => $row['town'],
-                        'county' => $row['county'],
-                        'postcode' => $row['postcode'],
-                        'nhs_no' => $row['nhsno'],
-                        'first_name' => $row['firstname'],
-                        'surname' => $row['surname'],
-                        'dob' => $row['dob'],
+                        'asc_id' => $row['ascid'] ?? null,
+                        'address_1' => $row['address1'] ?? null,
+                        'address_2' => $row['address2'] ?? null,
+                        'address_3' => $row['address3'] ?? null,
+                        'town' => $row['town'] ?? null,
+                        'county' => $row['county'] ?? null,
+                        'postcode' => $row['postcode'] ?? null,
+                        'nhs_no' => $row['nhsno'] ?? null,
+                        'first_name' => $row['firstname'] ?? null,
+                        'surname' => $row['surname'] ?? null,
+                        'dob' => $row['dob'] ?? null,
                         'start_date' => $startDate,
                         'end_date' => $endDate,
-                        'cost' => $row['cost'],
-                        'frequency' => $row['frequency'],
-                        'service' => $row['service'],
-                        'service_type' => $row['servicetype'],
-                        'primary_support_reason_category' => $row['primarysupportreasoncategory']
+                        'cost' => $row['cost'] ?? null,
+                        'frequency' => $row['frequency'] ?? null,
+                        'service' => $row['service'] ?? null,
+                        'service_type' => $row['servicetype'] ?? null,
+                        'primary_support_reason_category' => $row['primarysupportreasoncategory'] ?? null
                     ]);
 
                 } else {
@@ -169,7 +177,7 @@ EOT;
         $uploadLogRecord = Upload_log::find($this->uploadedFile->id);
         $uploadLogRecord->processed = 1;
         $uploadLogRecord->status = 0;
-        $uploadLogRecord->error_msg = $exception->getMessage();
+        $uploadLogRecord->error_msg = substr($exception->getMessage(), 0, 225);
         $uploadLogRecord->save();
 
         $this->deleteFile();
@@ -178,5 +186,17 @@ EOT;
     public function deleteFile()
     {
         Storage::delete($this->uploadedFile->path);
+    }
+
+    public function checkMandatoryColumns($columns, $row)
+    {
+        foreach ($columns as $column) {
+            if ($row[$column]) {
+
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }
