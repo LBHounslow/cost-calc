@@ -90,10 +90,6 @@
                     </thead>
                 </table>
                 <br><br>
-                <!--<input id="toggle-event" type="checkbox" checked data-toggle="toggle" data-on="Sum" data-off="Count"
-                       data-onstyle="primary"
-                       data-offstyle="primary">-->
-
             </div>
 
 
@@ -163,23 +159,21 @@
 
 @section('headerScripts')
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
+          href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css"/>
+          href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css"/>
 @endsection
 
 @section('footerScripts')
 
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/extensions/export/bootstrap-table-export.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
     <script src="/js/tableExport.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
 
 
     <!-- Multi Select plugin && Date Picker -->
@@ -318,32 +312,6 @@
 
         });
 
-        /*function rebuildPieChart(response) {
-         //Create Pie Chart
-         var servicePieChart = new PieChart('#spend-by-service-chart', response, {
-         labelKey: 'serviceType',
-         dataKey: 'sum_report_cost'
-         }, 'Currency');
-
-         servicePieChart.build();
-         }*/
-
     </script>
-
-
-    <!-- SUM / COUNT Toggle -->
-    <script>
-        /*$('#toggle-event').change(function () {
-
-         if ($(this).prop('checked')) {
-         myPieChart.destroy();
-         createPieChart("#myChart", labelsArr, dataSum);
-         } else {
-         myPieChart.destroy();
-         createPieChart("#myChart", labelsArr, dataCount);
-         }
-         });*/
-    </script>
-
 
 @endsection
