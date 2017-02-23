@@ -78,10 +78,6 @@ var Spend = {
                 that.spendByServices = response;
                 $('#spend-by-service-table').bootstrapTable('load', response);
                 callback();
-
-                //that.ajaxResponse.push(response);
-                //that.ajaxResponse = response;
-                //rebuildPieChart(response);
             },
         });
     },
@@ -111,15 +107,15 @@ var Spend = {
             success: function (response) {
                 that.clientSpend = response;
                 $('#client-spend-table').bootstrapTable('load', response);
+                $("#client-spend-table tr td:nth-child(4), #client-spend-table tr td:nth-child(5)").each(function () {
+                    if ($(this).text() == '-') {
+
+                    } else {
+                        var d = moment($(this).text()).format("DD/MM/YYYY");
+                        $(this).html(d);
+                    }
+                });
                 callback();
-
-
-                /*var clientPieChart = new PieChart('#client-spend-chart', response, {
-                 labelKey: 'service_type',
-                 dataKey: 'report_cost'
-                 }, 'Currency');
-
-                 clientPieChart.build();*/
 
             },
         });
