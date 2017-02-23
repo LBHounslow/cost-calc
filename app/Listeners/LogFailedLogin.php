@@ -30,8 +30,8 @@ class LogFailedLogin
     {
         $login = new User_login_log;
         $login->create([
-            'user_id' => $event->user->id,
-            'login_user_name' => $event->user->name,
+            'user_id' => 0,
+            'login_user_name' => 0,
             'login_user_email' => $event->user->email,
             'login_client_ip' => request()->ip(),
             'success' => 0,
