@@ -57,25 +57,40 @@ class ImportTempAccom implements ShouldQueue
                     }
                 }
 
-                HousingTempAccom::create([
-                    'upload_id' => $fileId,
-                    'pin' => $row['pin'],
-                    'address_1' => $row['address1'],
-                    'address_2' => $row['address2'],
-                    'address_3' => $row['address3'],
-                    'address_4' => $row['address4'],
-                    'postcode' => $row['postcode'],
-                    'ni' => $row['ni'],
-                    'first_name' => $row['firstname'],
-                    'surname' => $row['surname'],
-                    'dob' => $row['dob'],
-                    'residents' => $row['residents'],
-                    'start_date' => $row['startdate'],
-                    'end_date' => $row['enddate'],
-                    'weekly_cost' => $row['cost'],
-                    'prop_type' => $row['proptype'],
-                    'prop_sub_type' => $row['propsubtype'],
-                ]);
+                $mandatoryColumns = [
+                    'postcode',
+                    'dob',
+                    'surname',
+                    'startdate',
+                    'cost',
+                ];
+
+                if ($this->checkMandatoryColumns($mandatoryColumns, $row) && $emptyRow === false) {
+
+                    HousingTempAccom::create([
+                        'upload_id' => $fileId,
+                        'pin' => $row['pin'] ?? null,
+                        'address_1' => $row['address1'] ?? null,
+                        'address_2' => $row['address2'] ?? null,
+                        'address_3' => $row['address3'] ?? null,
+                        'address_4' => $row['address4'] ?? null,
+                        'postcode' => $row['postcode'] ?? null,
+                        'ni' => $row['ni'] ?? null,
+                        'first_name' => $row['firstname'] ?? null,
+                        'surname' => $row['surname'] ?? null,
+                        'dob' => $row['dob'] ?? null,
+                        'residents' => $row['residents'] ?? null,
+                        'start_date' => $row['startdate'] ?? null,
+                        'end_date' => $row['enddate'] ?? null,
+                        'weekly_cost' => $row['cost'] ?? null,
+                        'prop_type' => $row['proptype'] ?? null,
+                        'prop_sub_type' => $row['propsubtype'] ?? null,
+                    ]);
+
+                } else {
+
+                }
+
 
             });
         });
@@ -128,6 +143,7 @@ EOT;
      */
     public function failed(Exception $exception)
     {
+        HousingTempAccom::where('upload_id', $this->uploadedFile->id)->delete();
         $uploadLogRecord = Upload_log::find($this->uploadedFile->id);
         $uploadLogRecord->processed = 1;
         $uploadLogRecord->status = 0;
@@ -139,5 +155,17 @@ EOT;
     public function deleteFile()
     {
         Storage::delete($this->uploadedFile->path);
+    }
+
+    public function checkMandatoryColumns($columns, $row)
+    {
+        foreach ($columns as $column) {
+            if ($row[$column]) {
+
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }
