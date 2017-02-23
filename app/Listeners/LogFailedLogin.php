@@ -28,9 +28,6 @@ class LogFailedLogin
      */
     public function handle(Failed $event)
     {
-
-
-        slack();
         $login = new User_login_log;
         $login->create([
             'user_id' => 0,
