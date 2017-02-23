@@ -4,11 +4,11 @@ namespace App\Listeners;
 
 use App\User_login_log;
 use Carbon\Carbon;
-use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Failed;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class LogSuccessfulLogin
+class LogFailedLogin
 {
     /**
      * Create the event listener.
@@ -23,19 +23,18 @@ class LogSuccessfulLogin
     /**
      * Handle the event.
      *
-     * @param  Login $event
+     * @param  Failed $event
      * @return void
      */
-    public function handle(Login $event)
+    public function handle(Failed $event)
     {
-
         $login = new User_login_log;
         $login->create([
             'user_id' => $event->user->id,
             'login_user_name' => $event->user->name,
             'login_user_email' => $event->user->email,
             'login_client_ip' => request()->ip(),
-            'success' => 1,
+            'success' => 0,
         ]);
 
     }

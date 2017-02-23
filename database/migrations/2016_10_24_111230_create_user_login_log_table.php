@@ -19,6 +19,7 @@ class CreateUserLoginLogTable extends Migration
             $table->string('login_user_name');
             $table->string('login_user_email');
             $table->string('login_client_ip');
+            $table->integer('success');
             $table->timestamps();
         });
     }

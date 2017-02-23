@@ -21,7 +21,7 @@ class User_login_log extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'login_user_name', 'login_user_email', 'login_client_ip'
+        'user_id', 'login_user_name', 'login_user_email', 'login_client_ip', 'success',
     ];
 
     /**

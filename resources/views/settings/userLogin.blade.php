@@ -26,15 +26,21 @@
         </thead>
         <tbody>
         @foreach ($userLoginRequests as $userLoginRequest)
-            <tr>
-                <td>{{ $userLoginRequest->id }}</td>
-                <td>{{ $userLoginRequest->user_id }}</td>
-                <td>{{ $userLoginRequest->login_user_name }}</td>
-                <td>{{ $userLoginRequest->login_user_email }}</td>
-                <td>{{ $userLoginRequest->login_client_ip }}</td>
-                <td>{{ $userLoginRequest->created_at }}</td>
-            </tr>
-        @endforeach
+            @if($userLoginRequest->success == '0')
+                <tr class="danger">
+            @elseif($userLoginRequest->success == '1')
+                <tr class="success">
+            @else
+                <tr>
+                    @endif
+                    <td>{{ $userLoginRequest->id }}</td>
+                    <td>{{ $userLoginRequest->user_id }}</td>
+                    <td>{{ $userLoginRequest->login_user_name }}</td>
+                    <td>{{ $userLoginRequest->login_user_email }}</td>
+                    <td>{{ $userLoginRequest->login_client_ip }}</td>
+                    <td>{{ $userLoginRequest->created_at }}</td>
+                </tr>
+                @endforeach
         </tbody>
     </table>
 @stop
