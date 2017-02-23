@@ -16,10 +16,10 @@
 
     @if(isset($client))
         <ul class="list-group">
-            <li class="list-group-item">id: {{ $client->id }}</li>
-            <li class="list-group-item">surname: {{ $client->surname }}</li>
-            <li class="list-group-item">dob: {{ $client->dob }}</li>
-            <li class="list-group-item">postcode: {{ $client->postcode }}</li>
+            <li class="list-group-item"><strong>ID:</strong> {{ $client->id }}</li>
+            <li class="list-group-item"><strong>Surname:</strong> {{ $client->surname }}</li>
+            <li class="list-group-item"><strong>DOB:</strong> {{ $client->dob }}</li>
+            <li class="list-group-item"><strong>Postcode:</strong> {{ $client->postcode }}</li>
         </ul>
     @endif
 
