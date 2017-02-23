@@ -28,11 +28,14 @@ class LogFailedLogin
      */
     public function handle(Failed $event)
     {
+
+
+        slack();
         $login = new User_login_log;
         $login->create([
             'user_id' => 0,
             'login_user_name' => 0,
-            'login_user_email' => $event->user->email,
+            'login_user_email' => $event->credentials['email'],
             'login_client_ip' => request()->ip(),
             'success' => 0,
         ]);
