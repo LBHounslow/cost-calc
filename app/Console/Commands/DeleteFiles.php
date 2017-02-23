@@ -19,7 +19,7 @@ class DeleteFiles extends Command
      *
      * @var string
      */
-    protected $description = 'Delets all uploaded files that are older than 24 hours';
+    protected $description = 'Deletes all uploaded files that are older than 24 hours';
 
     /**
      * Create a new command instance.
@@ -44,10 +44,12 @@ class DeleteFiles extends Command
         foreach ($files as $file) {
 
             // check if file was modified over 24 hours ago
-            if (Storage::lastModified($file) < strtotime('-24 hours'))
-
+            if (Storage::lastModified($file) < strtotime('-24 hours')) {
+                
                 // delete file
                 Storage::delete($file);
+            }
+
         }
     }
 }
