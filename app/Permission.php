@@ -31,7 +31,12 @@ class Permission extends Model
      */
     public function getDateFormat()
     {
-        return 'Y-m-d H:i:s.u';
+        if (env('DB_CONNECTION', false) == 'mysql') {
+            return 'Y-m-d H:i:s';
+        } else {
+            return 'Y-m-d H:i:s.u';
+        }
+
     }
 
     /**
@@ -44,6 +49,11 @@ class Permission extends Model
      */
     public function fromDateTime($value)
     {
-        return substr(parent::fromDateTime($value), 0, -3);
+        if (env('DB_CONNECTION', false) == 'mysql') {
+            return $value;
+        } else {
+            return substr(parent::fromDateTime($value), 0, -3);
+        }
+
     }
 }
