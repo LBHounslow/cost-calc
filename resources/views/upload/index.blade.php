@@ -54,6 +54,8 @@
                     <td>
                         @if($uploadedFile->processed == '0')
                             <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Processing...
+                        @elseif($uploadedFile->deleted == '1')
+                            Deleted
                         @elseif($uploadedFile->status == '1')
                             Success
                         @elseif($uploadedFile->status == '0')
