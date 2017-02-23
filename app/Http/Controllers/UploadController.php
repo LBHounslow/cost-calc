@@ -24,7 +24,9 @@ class UploadController extends Controller
     public function index()
     {
         $allowedFileTypes = auth()->user()->getAllowedFileTypes();
-        $uploadedFiles = Upload_log::whereIn('fileType', $allowedFileTypes)->get();
+        $uploadedFiles = Upload_log::whereIn('fileType', $allowedFileTypes)
+            ->orderBy('id', 'desc')
+            ->get();
         return View::make('upload/index', ['uploadedFiles' => $uploadedFiles]);
     }
 

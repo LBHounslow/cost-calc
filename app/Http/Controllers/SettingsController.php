@@ -16,7 +16,7 @@ class SettingsController extends Controller
 
     public function getUserLoginLogs()
     {
-        $userLoginRequests = User_login_log::all();
+        $userLoginRequests = User_login_log::orderBy('id', 'desc')->get();
 
         return View::make('settings/userLogin', ['userLoginRequests' => $userLoginRequests]);
     }
