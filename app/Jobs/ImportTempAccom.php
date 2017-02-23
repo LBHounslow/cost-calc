@@ -62,7 +62,7 @@ class ImportTempAccom implements ShouldQueue
                     'dob',
                     'surname',
                     'startdate',
-                    'cost',
+                    'proptype',
                 ];
 
                 if ($this->checkMandatoryColumns($mandatoryColumns, $row) && $emptyRow === false) {
