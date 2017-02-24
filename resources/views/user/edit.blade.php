@@ -60,10 +60,13 @@
 
         <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
             <label for="active" class="col-md-4 control-label">Status</label>
-
+            
             <div class="col-md-6">
-                <input style="width: 20px;" id="active" type="checkbox" class="form-control" name="active" value="1"
-                       @if ($user->active == 1) checked @endif >
+                <div class="checkbox">
+                    <input style="max-width: 15px;" id="active" type="checkbox" class="form-control" name="active"
+                           value="1"
+                           @if ($user->active == 1) checked @endif >
+                </div>
             </div>
         </div>
 
