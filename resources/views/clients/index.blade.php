@@ -18,7 +18,9 @@
         <ul class="list-group">
             <li class="list-group-item"><strong>ID:</strong> {{ $client->id }}</li>
             <li class="list-group-item"><strong>Surname:</strong> {{ $client->surname }}</li>
-            <li class="list-group-item"><strong>DOB:</strong> {{ $client->dob }}</li>
+            <li class="list-group-item">
+                <strong>DOB:</strong> {{ Carbon\Carbon::parse($client->dob)->format('d-m-Y') }}
+            </li>
             <li class="list-group-item"><strong>Postcode:</strong> {{ $client->postcode }}</li>
         </ul>
     @endif
