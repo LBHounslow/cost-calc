@@ -77,17 +77,30 @@ class ImportTempAccom implements ShouldQueue
 
                     if (isset($existingRecord->id)) {
 
-                        // check if we need to do any updates
-                        if (empty($row['enddate']) || $row['enddate'] == $existingRecord->end_date) {
+                        if (empty($row['enddate'])) {
                             // do nothing...
                         } else {
-                            // update end date
-                            $existingRecord->end_date = $row['enddate'];
-                            $existingRecord->upload_id = $fileId;
-                            $existingRecord->save();
+
+                            $newDate = new \Carbon\Carbon($row['enddate']);
+                            
+                            if (empty($existingRecord->end_date)) {
+                                $existDate = new \Carbon\Carbon('1980-01-01');
+                            } else {
+                                $existDate = new \Carbon\Carbon($existingRecord->end_date);
+                            }
+                            if ($newDate->gt($existDate)) {
+                                // update end date
+                                $existingRecord->end_date = $row['enddate'];
+                                $existingRecord->upload_id = $fileId;
+                                $existingRecord->save();
+                            } else {
+                                // do nothing...
+                            }
+
                         }
 
                     } else {
+
                         // create new record
                         HousingTempAccom::create([
                             'upload_id' => $fileId,
@@ -113,8 +126,6 @@ class ImportTempAccom implements ShouldQueue
                 } else {
                     // do nothing...
                 }
-
-
             });
         });
 
