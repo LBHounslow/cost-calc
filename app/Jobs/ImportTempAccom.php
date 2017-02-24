@@ -67,25 +67,47 @@ class ImportTempAccom implements ShouldQueue
 
                 if ($this->checkMandatoryColumns($mandatoryColumns, $row) && $emptyRow === false) {
 
-                    HousingTempAccom::create([
-                        'upload_id' => $fileId,
-                        'pin' => $row['pin'] ?? null,
-                        'address_1' => $row['address1'] ?? null,
-                        'address_2' => $row['address2'] ?? null,
-                        'address_3' => $row['address3'] ?? null,
-                        'address_4' => $row['address4'] ?? null,
-                        'postcode' => $row['postcode'] ?? null,
-                        'ni' => $row['ni'] ?? null,
-                        'first_name' => $row['firstname'] ?? null,
-                        'surname' => $row['surname'] ?? null,
-                        'dob' => $row['dob'] ?? null,
-                        'residents' => $row['residents'] ?? null,
-                        'start_date' => $row['startdate'] ?? null,
-                        'end_date' => $row['enddate'] ?? null,
-                        'weekly_cost' => $row['cost'] ?? null,
-                        'prop_type' => $row['proptype'] ?? null,
-                        'prop_sub_type' => $row['propsubtype'] ?? null,
-                    ]);
+                    // check if we have record already
+                    $existingRecord = HousingTempAccom::where([
+                        ['surname', $row['surname'] ?? null],
+                        ['dob', $row['dob'] ?? null],
+                        ['postcode', $row['postcode'] ?? null],
+                        ['start_date', $row['startdate'] ?? null],
+                    ])->first();
+
+                    if (isset($existingRecord->id)) {
+
+                        // check if we need to do any updates
+                        if ($row['enddate'] > $existingRecord->end_date) {
+                            // update end date
+                            $existingRecord->end_date = $row['enddate'];
+                            $existingRecord->save();
+                        } else {
+                            // do nothing...
+                        }
+
+                    } else {
+                        // create new record
+                        HousingTempAccom::create([
+                            'upload_id' => $fileId,
+                            'pin' => $row['pin'] ?? null,
+                            'address_1' => $row['address1'] ?? null,
+                            'address_2' => $row['address2'] ?? null,
+                            'address_3' => $row['address3'] ?? null,
+                            'address_4' => $row['address4'] ?? null,
+                            'postcode' => $row['postcode'] ?? null,
+                            'ni' => $row['ni'] ?? null,
+                            'first_name' => $row['firstname'] ?? null,
+                            'surname' => $row['surname'] ?? null,
+                            'dob' => $row['dob'] ?? null,
+                            'residents' => $row['residents'] ?? null,
+                            'start_date' => $row['startdate'] ?? null,
+                            'end_date' => $row['enddate'] ?? null,
+                            'weekly_cost' => $row['cost'] ?? null,
+                            'prop_type' => $row['proptype'] ?? null,
+                            'prop_sub_type' => $row['propsubtype'] ?? null,
+                        ]);
+                    }
 
                 } else {
                     // do nothing...
