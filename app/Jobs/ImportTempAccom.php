@@ -79,12 +79,12 @@ class ImportTempAccom implements ShouldQueue
 
                         // check if we need to do any updates
                         if (empty($row['enddate']) || $row['enddate'] == $existingRecord->end_date) {
+                            // do nothing...
+                        } else {
                             // update end date
                             $existingRecord->end_date = $row['enddate'];
                             $existingRecord->upload_id = $fileId;
                             $existingRecord->save();
-                        } else {
-                            // do nothing...
                         }
 
                     } else {
