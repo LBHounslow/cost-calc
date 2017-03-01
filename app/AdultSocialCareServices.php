@@ -24,7 +24,7 @@ class AdultSocialCareServices extends Model
         'address_1', 'address_2', 'address_3', 'town', 'county', 'postcode',
         'nhs_no', 'first_name', 'surname', 'dob',
         'start_date', 'end_date', 'cost', 'frequency',
-        'service', 'service_type', 'primary_support_reason_category'
+        'service', 'service_type', 'primary_support_reason_category', 'care_package_line_item_id'
     ];
 
 

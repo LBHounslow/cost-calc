@@ -38,17 +38,14 @@ class ImportTempAccom implements ShouldQueue
      */
     public function handle()
     {
-
         $fileId = $this->uploadedFile->id;
         $filePath = '/storage/app/' . $this->uploadedFile->path;
 
         Excel::selectSheetsByIndex(0)->load($filePath, function ($reader) use ($fileId) {
-
             $reader->each(function ($row) use ($fileId) {
 
                 // check if it is an empty row
                 foreach ($row as $column) {
-
                     if ($column == NULL) {
                         $emptyRow = true;
                     } else {
@@ -82,7 +79,7 @@ class ImportTempAccom implements ShouldQueue
                         } else {
 
                             $newDate = new \Carbon\Carbon($row['enddate']);
-                            
+
                             if (empty($existingRecord->end_date)) {
                                 $existDate = new \Carbon\Carbon('1980-01-01');
                             } else {

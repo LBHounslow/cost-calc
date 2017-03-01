@@ -35,6 +35,7 @@ class CreateAdultSocialCareServicesTable extends Migration
             $table->string('service', 200)->nullable();
             $table->string('service_type', 200)->nullable();
             $table->string('primary_support_reason_category', 200)->nullable();
+            $table->integer('care_package_line_item_id')->nullable();
             $table->timestamps();
         });
     }

@@ -93,28 +93,65 @@ class ImportAdultSocialCareServices implements ShouldQueue
                         $endDate = $row['end'];
                     }
 
-                    /* create the record */
-                    AdultSocialCareServices::create([
-                        'upload_id' => $fileId,
-                        'asc_id' => $row['ascid'] ?? null,
-                        'address_1' => $row['address1'] ?? null,
-                        'address_2' => $row['address2'] ?? null,
-                        'address_3' => $row['address3'] ?? null,
-                        'town' => $row['town'] ?? null,
-                        'county' => $row['county'] ?? null,
-                        'postcode' => $row['postcode'] ?? null,
-                        'nhs_no' => $row['nhsno'] ?? null,
-                        'first_name' => $row['firstname'] ?? null,
-                        'surname' => $row['surname'] ?? null,
-                        'dob' => $row['dob'] ?? null,
-                        'start_date' => $startDate,
-                        'end_date' => $endDate,
-                        'cost' => $row['cost'] ?? null,
-                        'frequency' => $row['frequency'] ?? null,
-                        'service' => $row['service'] ?? null,
-                        'service_type' => $row['servicetype'] ?? null,
-                        'primary_support_reason_category' => $row['primarysupportreasoncategory'] ?? null
-                    ]);
+                    // check if we have record already
+                    $existingRecord = AdultSocialCareServices::where([
+                        ['surname', $row['surname'] ?? null],
+                        ['dob', $row['dob'] ?? null],
+                        ['postcode', $row['postcode'] ?? null],
+                        ['start_date', $startDate ?? null],
+                        ['care_package_line_item_id', $row['carepackagelineitemid'] ?? null],
+                    ])->first();
+
+                    if (isset($existingRecord->id)) {
+
+                        if (empty($endDate)) {
+                            // do nothing...
+                        } else {
+
+                            $newDate = new \Carbon\Carbon($endDate);
+
+                            if (empty($existingRecord->end_date)) {
+                                $existDate = new \Carbon\Carbon('1980-01-01');
+                            } else {
+                                $existDate = new \Carbon\Carbon($existingRecord->end_date);
+                            }
+                            if ($newDate->gt($existDate)) {
+                                // update end date
+                                $existingRecord->end_date = $endDate;
+                                $existingRecord->upload_id = $fileId;
+                                $existingRecord->save();
+                            } else {
+                                // do nothing...
+                            }
+
+                        }
+
+                    } else {
+
+                        /* create the record */
+                        AdultSocialCareServices::create([
+                            'upload_id' => $fileId,
+                            'asc_id' => $row['ascid'] ?? null,
+                            'address_1' => $row['address1'] ?? null,
+                            'address_2' => $row['address2'] ?? null,
+                            'address_3' => $row['address3'] ?? null,
+                            'town' => $row['town'] ?? null,
+                            'county' => $row['county'] ?? null,
+                            'postcode' => $row['postcode'] ?? null,
+                            'nhs_no' => $row['nhsno'] ?? null,
+                            'first_name' => $row['firstname'] ?? null,
+                            'surname' => $row['surname'] ?? null,
+                            'dob' => $row['dob'] ?? null,
+                            'start_date' => $startDate,
+                            'end_date' => $endDate,
+                            'cost' => $row['cost'] ?? null,
+                            'frequency' => $row['frequency'] ?? null,
+                            'service' => $row['service'] ?? null,
+                            'service_type' => $row['servicetype'] ?? null,
+                            'primary_support_reason_category' => $row['primarysupportreasoncategory'] ?? null,
+                            'care_package_line_item_id' => $row['carepackagelineitemid'] ?? null
+                        ]);
+                    }
 
                 } else {
                     // do nothing...
@@ -174,12 +211,12 @@ EOT;
     public function failed(Exception $exception)
     {
         /* add error message to upload log */
+        AdultSocialCareServices::where('upload_id', $this->uploadedFile->id)->delete();
         $uploadLogRecord = Upload_log::find($this->uploadedFile->id);
         $uploadLogRecord->processed = 1;
         $uploadLogRecord->status = 0;
         $uploadLogRecord->error_msg = substr($exception->getMessage(), 0, 225);
         $uploadLogRecord->save();
-
         $this->deleteFile();
     }
 
