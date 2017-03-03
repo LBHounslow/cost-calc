@@ -15,7 +15,7 @@ class ProvidersTableSeeder extends Seeder
         DB::table('providers')->insert([
                 'code' => 'hounslow-madm',
                 'display_name' => 'Hounslow MADM',
-                'allowed_file_types' => '["h01","asc01"]',
+                'allowed_file_types' => '["h01","asc01", "rb03"]',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]
@@ -24,7 +24,7 @@ class ProvidersTableSeeder extends Seeder
         DB::table('providers')->insert([
                 'code' => 'hounslow-housing',
                 'display_name' => 'Hounslow Housing',
-                'allowed_file_types' => '["h01"]',
+                'allowed_file_types' => '["h01", "rb03"]',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]

@@ -28,6 +28,14 @@ class FileTypesTableSeeder extends Seeder
             ]
         );
 
+        DB::table('file_types')->insert([
+                'code' => 'rb03',
+                'display_name' => 'Housing Benefit Switch',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ]
+        );
+
         /*DB::table('file_types')->insert([
                 'code' => 'rb01',
                 'display_name' => 'Housing Benefit Entitlement',
