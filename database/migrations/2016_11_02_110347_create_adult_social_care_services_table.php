@@ -15,7 +15,7 @@ class CreateAdultSocialCareServicesTable extends Migration
     {
         Schema::create('import_adult_social_care_services', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->nullable();
+            $table->integer('client_id')->nullable()->index();
             $table->integer('upload_id');
             $table->string('asc_id', 200)->nullable();
             $table->string('address_1', 200)->nullable();

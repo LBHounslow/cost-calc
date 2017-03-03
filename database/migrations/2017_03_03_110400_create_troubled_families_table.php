@@ -15,7 +15,7 @@ class CreateTroubledFamiliesTable extends Migration
     {
         Schema::create('import_troubled_families', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->nullable();
+            $table->integer('client_id')->nullable()->index();
             $table->integer('upload_id');
             $table->string('individual_id', 200)->nullable();
             $table->string('family_id', 200)->nullable();

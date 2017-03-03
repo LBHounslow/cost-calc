@@ -15,7 +15,7 @@ class CreateHousingBenefitSwitchesTable extends Migration
     {
         Schema::create('import_housing_benefit_switch', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->nullable();
+            $table->integer('client_id')->nullable()->index();
             $table->integer('upload_id');
             $table->integer('claim_no')->nullable();
             $table->string('ni', 200)->nullable();
