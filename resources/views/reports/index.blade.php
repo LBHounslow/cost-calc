@@ -36,6 +36,17 @@
                 <input type="radio" name="tempFilter" id="inlineRadio3" value="3"> Not Temp Accom
             </label>
         </div>
+        <div class="form-group">
+            <label class="radio-inline">
+                <input type="radio" name="troubledFilter" id="inlineRadio1" value="1" checked> All
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="troubledFilter" id="inlineRadio2" value="2"> Troubled Families Only
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="troubledFilter" id="inlineRadio3" value="3"> Not Troubled Families
+            </label>
+        </div>
         <button type="button" id="total-spend-btn" class="btn btn-primary">Apply Filter</button>
     </form>
 

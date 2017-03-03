@@ -44,12 +44,14 @@ class ReportController extends Controller
     public function getSpendByClient(Request $request = null)
     {
 
+        /* Service Type Filter */
         if (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } else {
             $whereClause = "WHERE 1=1 ";
         }
 
+        /* Temp Accom Filter */
         if (isset($request) && $request->input('tempFilter') === '1') {
             // all
             $whereClause .= " AND 1 = 1";
@@ -63,6 +65,21 @@ class ReportController extends Controller
             $whereClause .= " AND 2 = 2";
         }
 
+        /* Troubled Families Filter */
+        if (isset($request) && $request->input('troubledFilter') === '1') {
+            // all
+            $whereClause .= " AND 1 = 1";
+        } elseif (isset($request) && $request->input('troubledFilter') === '2') {
+            // only temp
+            $whereClause .= " AND id IN (select client_id from import_troubled_families)";
+        } elseif (isset($request) && $request->input('troubledFilter') === '3') {
+            // not temp
+            $whereClause .= " AND id NOT IN (select client_id from import_troubled_families)";
+        } else {
+            $whereClause .= " AND 2 = 2";
+        }
+
+        /* Date Filter */
         if (isset($request) && $request->input('start') && $request->input('end')) {
             $start = $request->input('start');
             $end = $request->input('end');
@@ -80,12 +97,14 @@ class ReportController extends Controller
 
     public function getSpendByService(Request $request = null)
     {
+        /* Service Type Filter */
         if (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } else {
             $whereClause = "WHERE 1=1 ";
         }
 
+        /* Temp Accom Filter */
         if (isset($request) && $request->input('tempFilter') === '1') {
             // all
             $whereClause .= " AND 1 = 1";
@@ -99,6 +118,21 @@ class ReportController extends Controller
             $whereClause .= " AND 2 = 2";
         }
 
+        /* Troubled Families Filter */
+        if (isset($request) && $request->input('troubledFilter') === '1') {
+            // all
+            $whereClause .= " AND 1 = 1";
+        } elseif (isset($request) && $request->input('troubledFilter') === '2') {
+            // only temp
+            $whereClause .= " AND id IN (select client_id from import_troubled_families)";
+        } elseif (isset($request) && $request->input('troubledFilter') === '3') {
+            // not temp
+            $whereClause .= " AND id NOT IN (select client_id from import_troubled_families)";
+        } else {
+            $whereClause .= " AND 2 = 2";
+        }
+
+        /* Date Filter */
         if (isset($request) && $request->input('start') && $request->input('end')) {
             $start = $request->input('start');
             $end = $request->input('end');
@@ -117,12 +151,14 @@ class ReportController extends Controller
 
     public function getClientSpend(Request $request = null)
     {
+        /* Service Type Filter */
         if (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } else {
             $whereClause = "WHERE 1=1 ";
         }
 
+        /* Date Filter */
         if (isset($request) && $request->input('start') && $request->input('end')) {
             $start = $request->input('start');
             $end = $request->input('end');

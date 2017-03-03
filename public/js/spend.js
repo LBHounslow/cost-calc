@@ -13,6 +13,7 @@ var Spend = {
         dateRange = this.getDateRange();
         serviceTypes = this.getServiceTypes();
         tempFilter = this.getTempAccomFilter();
+        troubledFilter = this.getTroubledFilter();
 
         /* save them to object for easy retrieval */
         this.filter = {
@@ -20,6 +21,7 @@ var Spend = {
             endDate: moment(dateRange.endDate).format('YYYY-MM-DD'),
             serviceTypes: encodeURI(serviceTypes),
             tempFilter: tempFilter,
+            troubledFilter: troubledFilter,
         };
     },
 
@@ -27,6 +29,7 @@ var Spend = {
 
         var params = [
             {tempFilter: this.filter.tempFilter},
+            {troubledFilter: this.filter.troubledFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
@@ -57,6 +60,7 @@ var Spend = {
 
         var params = [
             {tempFilter: this.filter.tempFilter},
+            {troubledFilter: this.filter.troubledFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
@@ -87,6 +91,7 @@ var Spend = {
         var params = [
             {clientId: clientId},
             {tempFilter: this.filter.tempFilter},
+            {troubledFilter: this.filter.troubledFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
@@ -137,6 +142,10 @@ var Spend = {
 
     getTempAccomFilter: function () {
         return $('input[name=tempFilter]:checked').val();
+    },
+
+    getTroubledFilter: function () {
+        return $('input[name=troubledFilter]:checked').val();
     },
 
     generateUrlWithGetParams: function (baseUrl, params) {
