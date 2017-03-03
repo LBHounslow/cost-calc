@@ -7,6 +7,7 @@ use App\Upload_log;
 use App\Jobs\ImportTempAccom;
 use App\Jobs\ImportAdultSocialCareServices;
 use App\Jobs\ImportHousingBenefitSwitch;
+use App\Jobs\ImportTroubledFamilies;
 
 class ImportFile extends Command
 {
@@ -53,6 +54,8 @@ class ImportFile extends Command
                 dispatch(new ImportAdultSocialCareServices($uploadedFile));
             } elseif ($uploadedFile->filetype == 'rb03') {
                 dispatch(new ImportHousingBenefitSwitch($uploadedFile));
+            } elseif ($uploadedFile->filetype == 'tf01') {
+                dispatch(new ImportTroubledFamilies($uploadedFile));
             }
         }
 
