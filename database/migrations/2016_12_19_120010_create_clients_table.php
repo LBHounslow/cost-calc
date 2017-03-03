@@ -14,7 +14,7 @@ class CreateClientsTable extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->increments('id')->primary();
+            $table->increments('id');
             $table->string('firstname', 200)->nullable();
             $table->string('surname', 200)->nullable();
             $table->date('dob')->nullable();
