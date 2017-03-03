@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Upload_log;
 use App\Jobs\ImportTempAccom;
 use App\Jobs\ImportAdultSocialCareServices;
+use App\Jobs\ImportHousingBenefitSwitch;
 
 class ImportFile extends Command
 {
@@ -50,6 +51,8 @@ class ImportFile extends Command
                 dispatch(new ImportTempAccom($uploadedFile));
             } elseif ($uploadedFile->filetype == 'asc01') {
                 dispatch(new ImportAdultSocialCareServices($uploadedFile));
+            } elseif ($uploadedFile->filetype == 'rb03') {
+                dispatch(new ImportHousingBenefitSwitch($uploadedFile));
             }
         }
 

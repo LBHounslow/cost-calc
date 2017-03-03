@@ -12,6 +12,7 @@ use App\Events\UploadFile;
 use App\FileType;
 use App\HousingTempAccom;
 use App\AdultSocialCareServices;
+use App\HousingBenefitSwitch;
 
 
 class UploadController extends Controller
@@ -126,6 +127,8 @@ class UploadController extends Controller
                 $deletedRows = AdultSocialCareServices::where('upload_id', $uploadFileRecord->id)->delete();
             } elseif ($uploadFileRecord->filetype == 'h01') {
                 $deletedRows = HousingTempAccom::where('upload_id', $uploadFileRecord->id)->delete();
+            } elseif ($uploadFileRecord->filetype == 'rb03') {
+                $deletedRows = HousingBenefitSwitch::where('upload_id', $uploadFileRecord->id)->delete();
             } else {
                 flash('No records were found - nothing was deleted');
                 return Redirect::to('/uploads');
