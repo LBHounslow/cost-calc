@@ -18,6 +18,8 @@ class ImportHousingBenefitSwitch implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
+    protected $uploadedFile;
+
     /**
      * Create a new job instance.
      *
@@ -135,7 +137,7 @@ EOT;
      */
     public function failed(Exception $exception)
     {
-        HousingTempAccom::where('upload_id', $this->uploadedFile->id)->delete();
+        HousingBenefitSwitch::where('upload_id', $this->uploadedFile->id)->delete();
         $uploadLogRecord = Upload_log::find($this->uploadedFile->id);
         $uploadLogRecord->processed = 1;
         $uploadLogRecord->status = 0;
