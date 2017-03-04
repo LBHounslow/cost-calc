@@ -138,7 +138,7 @@ class ReportController extends Controller
     {
         /* Service Type Filter */
         if (isset($request) && $request->input('serviceType') && $request->input('serviceFilter') === '2') {
-            $whereClause = $this->createServiceFilterClause();
+            $whereClause = $this->createServiceFilterClause($request->input('serviceType'));
         } elseif (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } elseif ($allServices) {
@@ -210,7 +210,7 @@ class ReportController extends Controller
     {
         /* Service Type Filter */
         if (isset($request) && $request->input('serviceType') && $request->input('serviceFilter') === '2') {
-            $whereClause = $this->createServiceFilterClause();
+            $whereClause = $this->createServiceFilterClause($request->input('serviceType'));
         } elseif (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } elseif ($allServices) {
