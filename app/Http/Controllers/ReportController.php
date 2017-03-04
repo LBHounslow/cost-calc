@@ -29,6 +29,27 @@ class ReportController extends Controller
         return "'" . str_replace(",", "','", rawurldecode($services)) . "'";
     }
 
+    private function createServiceFilterClause($services)
+    {
+        $servicesArr = explode(',', rawurldecode($services));
+
+        $i = 1;
+        $query = '';
+
+        foreach ($servicesArr as $service) {
+
+            if ($i === '1') {
+                $op = 'WHERE';
+            } else {
+                $op = 'AND';
+            }
+
+            $query .= "$op id IN (SELECT id FROM Costs WHERE CONCAT(Costs.service, ' - ', Costs.service_type) = '$service' AND Costs.id = SubQuery.id) ";
+            $i++;
+        }
+        return $query;
+    }
+
     private function executeQuery($query)
     {
         if (env('DB_CONNECTION', false) == 'mysql') {
@@ -45,7 +66,9 @@ class ReportController extends Controller
     {
 
         /* Service Type Filter */
-        if (isset($request) && $request->input('serviceType')) {
+        if (isset($request) && $request->input('serviceType') && $request->input('serviceFilter') === '2') {
+            $whereClause = $this->createServiceFilterClause();
+        } elseif (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } elseif ($allServices) {
             $whereClause = "WHERE 1=1 ";
@@ -114,7 +137,9 @@ class ReportController extends Controller
     public function getSpendByService(Request $request = null, $allServices = false)
     {
         /* Service Type Filter */
-        if (isset($request) && $request->input('serviceType')) {
+        if (isset($request) && $request->input('serviceType') && $request->input('serviceFilter') === '2') {
+            $whereClause = $this->createServiceFilterClause();
+        } elseif (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } elseif ($allServices) {
             $whereClause = "WHERE 1=1 ";
@@ -184,7 +209,9 @@ class ReportController extends Controller
     public function getClientSpend(Request $request = null, $allServices = false)
     {
         /* Service Type Filter */
-        if (isset($request) && $request->input('serviceType')) {
+        if (isset($request) && $request->input('serviceType') && $request->input('serviceFilter') === '2') {
+            $whereClause = $this->createServiceFilterClause();
+        } elseif (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } elseif ($allServices) {
             $whereClause = "WHERE 1=1 ";

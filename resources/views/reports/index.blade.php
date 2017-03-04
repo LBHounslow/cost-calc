@@ -27,6 +27,14 @@
         </div>
         <div class="form-group">
             <label class="radio-inline">
+                <input type="radio" name="serviceFilter" id="inlineRadio1" value="1" checked> A Service
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="serviceFilter" id="inlineRadio2" value="2"> All Services
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="radio-inline">
                 <input type="radio" name="tempFilter" id="inlineRadio1" value="1" checked> All
             </label>
             <label class="radio-inline">
