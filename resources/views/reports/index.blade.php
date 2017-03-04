@@ -47,6 +47,17 @@
                 <input type="radio" name="troubledFilter" id="inlineRadio3" value="3"> Not Troubled Families
             </label>
         </div>
+        <div class="form-group">
+            <label class="radio-inline">
+                <input type="radio" name="hbSwitchFilter" id="inlineRadio1" value="1" checked> All
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="hbSwitchFilter" id="inlineRadio2" value="2"> Housing Benefit Switch Only
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="hbSwitchFilter" id="inlineRadio3" value="3"> Not Housing Benefit Switch
+            </label>
+        </div>
         <button type="button" id="total-spend-btn" class="btn btn-primary">Apply Filter</button>
     </form>
 

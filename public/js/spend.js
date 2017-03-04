@@ -14,6 +14,7 @@ var Spend = {
         serviceTypes = this.getServiceTypes();
         tempFilter = this.getTempAccomFilter();
         troubledFilter = this.getTroubledFilter();
+        hbSwitchFilter = this.getHbSwitchFilter();
 
         /* save them to object for easy retrieval */
         this.filter = {
@@ -22,6 +23,7 @@ var Spend = {
             serviceTypes: encodeURI(serviceTypes),
             tempFilter: tempFilter,
             troubledFilter: troubledFilter,
+            hbSwitchFilter: hbSwitchFilter,
         };
     },
 
@@ -30,6 +32,7 @@ var Spend = {
         var params = [
             {tempFilter: this.filter.tempFilter},
             {troubledFilter: this.filter.troubledFilter},
+            {hbSwitchFilter: this.filter.hbSwitchFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
@@ -61,6 +64,7 @@ var Spend = {
         var params = [
             {tempFilter: this.filter.tempFilter},
             {troubledFilter: this.filter.troubledFilter},
+            {hbSwitchFilter: this.filter.hbSwitchFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
@@ -92,6 +96,7 @@ var Spend = {
             {clientId: clientId},
             {tempFilter: this.filter.tempFilter},
             {troubledFilter: this.filter.troubledFilter},
+            {hbSwitchFilter: this.filter.hbSwitchFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
@@ -147,6 +152,11 @@ var Spend = {
     getTroubledFilter: function () {
         return $('input[name=troubledFilter]:checked').val();
     },
+
+    getHbSwitchFilter: function () {
+        return $('input[name=hbSwitchFilter]:checked').val();
+    },
+
 
     generateUrlWithGetParams: function (baseUrl, params) {
 

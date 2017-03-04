@@ -48,7 +48,7 @@ class ReportController extends Controller
         if (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } else {
-            $whereClause = "WHERE 1=1 ";
+            $whereClause = "WHERE 1=2 ";
         }
 
         /* Temp Accom Filter */
@@ -75,6 +75,20 @@ class ReportController extends Controller
         } elseif (isset($request) && $request->input('troubledFilter') === '3') {
             // not temp
             $whereClause .= " AND id NOT IN (select client_id from import_troubled_families)";
+        } else {
+            $whereClause .= " AND 2 = 2";
+        }
+
+        /* Housing Benefit Switch Filter */
+        if (isset($request) && $request->input('hbSwitchFilter') === '1') {
+            // all
+            $whereClause .= " AND 1 = 1";
+        } elseif (isset($request) && $request->input('hbSwitchFilter') === '2') {
+            // only temp
+            $whereClause .= " AND id IN (select client_id from import_housing_benefit_switch)";
+        } elseif (isset($request) && $request->input('hbSwitchFilter') === '3') {
+            // not temp
+            $whereClause .= " AND id NOT IN (select client_id from import_housing_benefit_switch)";
         } else {
             $whereClause .= " AND 2 = 2";
         }
@@ -128,6 +142,20 @@ class ReportController extends Controller
         } elseif (isset($request) && $request->input('troubledFilter') === '3') {
             // not temp
             $whereClause .= " AND id NOT IN (select client_id from import_troubled_families)";
+        } else {
+            $whereClause .= " AND 2 = 2";
+        }
+
+        /* Housing Benefit Switch Filter */
+        if (isset($request) && $request->input('hbSwitchFilter') === '1') {
+            // all
+            $whereClause .= " AND 1 = 1";
+        } elseif (isset($request) && $request->input('hbSwitchFilter') === '2') {
+            // only temp
+            $whereClause .= " AND id IN (select client_id from import_housing_benefit_switch)";
+        } elseif (isset($request) && $request->input('hbSwitchFilter') === '3') {
+            // not temp
+            $whereClause .= " AND id NOT IN (select client_id from import_housing_benefit_switch)";
         } else {
             $whereClause .= " AND 2 = 2";
         }
