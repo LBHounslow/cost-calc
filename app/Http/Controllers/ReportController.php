@@ -12,9 +12,9 @@ class ReportController extends Controller
 
     public function index()
     {
-        $serviceTypes = $this->getServiceTypes();
-        $spendByClients = $this->getSpendByClient();
-        $spendByServices = $this->getSpendByService();
+        $serviceTypes = $this->getServiceTypes(null, true);
+        $spendByClients = $this->getSpendByClient(null, true);
+        $spendByServices = $this->getSpendByService(null, true);
 
         return View::make('reports/index', [
             'clientsTotalSpend' => json_encode($spendByClients),
@@ -41,12 +41,14 @@ class ReportController extends Controller
     }
 
 
-    public function getSpendByClient(Request $request = null)
+    public function getSpendByClient(Request $request = null, $allServices = false)
     {
 
         /* Service Type Filter */
         if (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
+        } elseif ($allServices) {
+            $whereClause = "WHERE 1=1 ";
         } else {
             $whereClause = "WHERE 1=2 ";
         }
@@ -109,13 +111,15 @@ class ReportController extends Controller
     }
 
 
-    public function getSpendByService(Request $request = null)
+    public function getSpendByService(Request $request = null, $allServices = false)
     {
         /* Service Type Filter */
         if (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
-        } else {
+        } elseif ($allServices) {
             $whereClause = "WHERE 1=1 ";
+        } else {
+            $whereClause = "WHERE 1=2 ";
         }
 
         /* Temp Accom Filter */
@@ -177,13 +181,15 @@ class ReportController extends Controller
     }
 
 
-    public function getClientSpend(Request $request = null)
+    public function getClientSpend(Request $request = null, $allServices = false)
     {
         /* Service Type Filter */
         if (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
-        } else {
+        } elseif ($allServices) {
             $whereClause = "WHERE 1=1 ";
+        } else {
+            $whereClause = "WHERE 1=2 ";
         }
 
         /* Date Filter */
