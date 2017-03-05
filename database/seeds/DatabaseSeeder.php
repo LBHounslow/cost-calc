@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FileTypesTableSeeder::class);
         $this->call(ProvidersTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
+        $this->call(ImportScriptTableSeeder::class);
+        $this->call(ImportModelTableSeeder::class);
     }
 }

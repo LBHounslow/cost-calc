@@ -23,6 +23,17 @@ class FileType extends Model
         'code', 'display_name'
     ];
 
+    public function importScript()
+    {
+        return $this->hasOne('App\ImportScript', 'id', 'import_script_id');
+    }
+
+    public function importModel()
+    {
+        return $this->hasOne('App\ImportModel', 'id', 'import_model_id');
+
+    }
+
 
     /**
      * Get the format for database stored dates.

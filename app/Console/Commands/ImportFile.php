@@ -4,10 +4,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Upload_log;
-use App\Jobs\ImportTempAccom;
-use App\Jobs\ImportAdultSocialCareServices;
-use App\Jobs\ImportHousingBenefitSwitch;
-use App\Jobs\ImportTroubledFamilies;
 
 class ImportFile extends Command
 {
@@ -48,15 +44,8 @@ class ImportFile extends Command
         // 2 - work out which import script to run
         if (isset($uploadedFile->filetype)) {
 
-            if ($uploadedFile->filetype == 'h01') {
-                dispatch(new ImportTempAccom($uploadedFile));
-            } elseif ($uploadedFile->filetype == 'asc01') {
-                dispatch(new ImportAdultSocialCareServices($uploadedFile));
-            } elseif ($uploadedFile->filetype == 'rb03') {
-                dispatch(new ImportHousingBenefitSwitch($uploadedFile));
-            } elseif ($uploadedFile->filetype == 'tf01') {
-                dispatch(new ImportTroubledFamilies($uploadedFile));
-            }
+            dispatch(new $uploadedFile->FileType->importScript->script_path($uploadedFile));
+
         }
 
         $this->info('Finished');

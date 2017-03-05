@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Upload_log extends Model
+class ImportModel extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'upload_log';
+    protected $table = 'import_models';
 
 
     /**
@@ -20,7 +20,7 @@ class Upload_log extends Model
      * @var array
      */
     protected $fillable = [
-        'original_filename', 'path', 'filetype', 'user_id', 'processed', 'status', 'error_msg', 'deleted',
+
     ];
 
 
@@ -37,11 +37,6 @@ class Upload_log extends Model
             return 'Y-m-d H:i:s.u';
         }
 
-    }
-
-    public function fileType()
-    {
-        return $this->hasOne('App\FileType', 'code', 'filetype');
     }
 
     /**

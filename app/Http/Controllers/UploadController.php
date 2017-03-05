@@ -123,18 +123,7 @@ class UploadController extends Controller
         $uploadFileRecord = Upload_log::find($id);
         $allowedFileTypes = auth()->user()->getAllowedFileTypes();
         if (in_array($uploadFileRecord->filetype, $allowedFileTypes)) {
-            if ($uploadFileRecord->filetype == 'asc01') {
-                $deletedRows = AdultSocialCareServices::where('upload_id', $uploadFileRecord->id)->delete();
-            } elseif ($uploadFileRecord->filetype == 'h01') {
-                $deletedRows = HousingTempAccom::where('upload_id', $uploadFileRecord->id)->delete();
-            } elseif ($uploadFileRecord->filetype == 'rb03') {
-                $deletedRows = HousingBenefitSwitch::where('upload_id', $uploadFileRecord->id)->delete();
-            } elseif ($uploadFileRecord->filetype == 'tf01') {
-                $deletedRows = TroubledFamilies::where('upload_id', $uploadFileRecord->id)->delete();
-            } else {
-                flash('No records were found - nothing was deleted');
-                return Redirect::to('/uploads');
-            }
+            $deletedRows = $uploadFileRecord->FileType->importModel->model_path::where('upload_id', $uploadFileRecord->id)->delete();
         } else {
             flash('You do not have permission to delete this file');
             return Redirect::to('/uploads');
