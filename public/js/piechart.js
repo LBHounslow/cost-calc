@@ -76,20 +76,24 @@ PieChart.prototype = {
 
         for (var i = 0; i < data.length; i++) {
 
-            existingKey = $.inArray(data[i][labelKey], that.labelsArr);
 
-            if (existingKey > -1) {
-                val = parseInt(that.dataArr[existingKey]);
-                val += parseInt(data[i][dataKey]);
+            if (data[i][dataKey] == '.00' || data[i][dataKey] == '0') {
+                
+                // do nothing
 
-                that.dataArr[existingKey] = val;
             } else {
-                that.labelsArr.push(data[i][labelKey]);
-                that.dataArr.push(data[i][dataKey]);
+                existingKey = $.inArray(data[i][labelKey], that.labelsArr);
+
+                if (existingKey > -1) {
+                    val = parseInt(that.dataArr[existingKey]);
+                    val += parseInt(data[i][dataKey]);
+
+                    that.dataArr[existingKey] = val;
+                } else {
+                    that.labelsArr.push(data[i][labelKey]);
+                    that.dataArr.push(data[i][dataKey]);
+                }
             }
-
-
-            /*if (i >= 50) { break; }*/
         }
 
     },
