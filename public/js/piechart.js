@@ -78,7 +78,7 @@ PieChart.prototype = {
 
 
             if (data[i][dataKey] == '.00' || data[i][dataKey] == '0') {
-                
+
                 // do nothing
 
             } else {
