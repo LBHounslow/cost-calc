@@ -14,14 +14,14 @@ class ImportScriptTableSeeder extends Seeder
     public function run()
     {
         DB::table('import_scripts')->insert([
-                'script_path' => 'App\Jobs\ImportAdultSocialCareServices',
+                'script_path' => 'App\Jobs\ImportTempAccom',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]
         );
 
         DB::table('import_scripts')->insert([
-                'script_path' => 'App\Jobs\ImportTempAccom',
+                'script_path' => 'App\Jobs\ImportAdultSocialCareServices',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]

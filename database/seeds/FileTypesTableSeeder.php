@@ -15,8 +15,8 @@ class FileTypesTableSeeder extends Seeder
         DB::table('file_types')->insert([
                 'code' => 'h01',
                 'display_name' => 'Temporary accommodation',
-                'import_script_id' => 2,
-                'import_model_id' => 2,
+                'import_script_id' => 1,
+                'import_model_id' => 1,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]
@@ -25,8 +25,8 @@ class FileTypesTableSeeder extends Seeder
         DB::table('file_types')->insert([
                 'code' => 'asc01',
                 'display_name' => 'Adult social care services provided',
-                'import_script_id' => 1,
-                'import_model_id' => 1,
+                'import_script_id' => 2,
+                'import_model_id' => 2,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]
