@@ -37,3 +37,9 @@ Route::get('/reports', 'ReportController@index')->middleware('permission:reports
 Route::get('/reports/spend-by-client', 'ReportController@getSpendByClient')->middleware('permission:reports');
 Route::get('/reports/spend-by-service', 'ReportController@getSpendByService')->middleware('permission:reports');
 Route::get('/reports/client-spend', 'ReportController@getClientSpend')->middleware('permission:reports');
+
+Route::get('/filetypes', 'FileTypeController@index')->middleware('permission:settings');
+Route::get('/filetype/{filetype}/edit', 'FileTypeController@edit')->middleware('permission:settings');
+Route::post('/filetype/{filetype}/update', 'FileTypeController@update')->middleware('permission:settings');
+Route::get('/filetype/create', 'FileTypeController@create')->middleware('permission:settings');
+Route::post('/filetype/store', 'FileTypeController@store')->middleware('permission:settings');
