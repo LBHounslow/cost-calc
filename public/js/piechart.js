@@ -77,7 +77,7 @@ PieChart.prototype = {
         for (var i = 0; i < data.length; i++) {
 
 
-            if (data[i][dataKey] == '.00' || data[i][dataKey] == '0') {
+            if (data[i][dataKey] == '.00' || data[i][dataKey] == '0' || data[i][dataKey] == null) {
 
                 // do nothing
 
