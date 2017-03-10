@@ -7,24 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class ImportModel extends Model
 {
     /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'import_models';
-
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-
-    ];
-
-
-    /**
      * Get the format for database stored dates.
      *
      * @return string

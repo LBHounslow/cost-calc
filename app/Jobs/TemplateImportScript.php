@@ -40,7 +40,9 @@ class TemplateImportScript implements ShouldQueue
 
     public function insertClients()
     {
-        $importTable = $this->uploadedFile->FileType->importModel->getTable();
+        $model = new $this->uploadedFile->fileType->importModel->model_path();
+        $importTable = $model->getTable();
+
 
         $sql = <<<EOT
 INSERT INTO [dbo].[clients]

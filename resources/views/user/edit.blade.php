@@ -33,7 +33,7 @@
 
                     @foreach($providers as $provider)
                         <option {{ $user->provider_id == $provider->id ? ' selected="selected"' : '' }}
-                                value="{{ $provider->code }}">{{ $provider->display_name }}
+                                value="{{ $provider->id }}">{{ $provider->display_name }}
                         </option>
                     @endforeach
 
