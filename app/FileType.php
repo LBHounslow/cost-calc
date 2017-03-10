@@ -20,7 +20,7 @@ class FileType extends Model
      * @var array
      */
     protected $fillable = [
-        'code', 'display_name', 'import_script_id', 'import_model_id',
+        'display_name', 'import_script_id', 'import_model_id',
     ];
 
     public function importScript()

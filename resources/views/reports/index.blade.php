@@ -67,6 +67,8 @@
             </label>
         </div>
         <button type="button" id="total-spend-btn" class="btn btn-primary">Apply Filter</button>
+        <!--<button type="button" id="total-spend-btn" class="btn btn-primary">Loading...<img src="/img/spin.gif"
+                                                                                          width="22px"></button>-->
     </form>
 
     <hr>
@@ -326,12 +328,15 @@
     <script>
         $('#total-spend-btn').click(function () {
 
+            changeSubmitOnFilter('loading');
+
             $('#client-spend-table').bootstrapTable('removeAll');
             Spend.getFilter();
             Spend.getSpendByClients(function () {
                 if ($('#myTabs .active > a').attr('href') == '#client-breakdown-tab') {
                     $('#myTabs a[href="#client-grouped-tab"]').tab('show');
                 }
+                changeSubmitOnFilter('complete');
             });
             Spend.getSpendByServices(function () {
                 servicePieChart.destroy();
@@ -339,8 +344,21 @@
                 servicePieChart.build();
             });
 
-
         });
+
+
+        function changeSubmitOnFilter(action) {
+
+            if (action == 'complete') {
+                var html = 'Apply Filter';
+            } else if (action == 'loading') {
+                var html = 'Loading...<img src="/img/spin.gif" width="22px">';
+            } else {
+                var html = 'Apply Filter';
+            }
+
+            $('#total-spend-btn').html(html);
+        }
 
     </script>
 

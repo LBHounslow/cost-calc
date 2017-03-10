@@ -43,3 +43,9 @@ Route::get('/filetype/{filetype}/edit', 'FileTypeController@edit')->middleware('
 Route::post('/filetype/{filetype}/update', 'FileTypeController@update')->middleware('permission:settings');
 Route::get('/filetype/create', 'FileTypeController@create')->middleware('permission:settings');
 Route::post('/filetype/store', 'FileTypeController@store')->middleware('permission:settings');
+
+Route::get('/providers', 'ProviderController@index')->middleware('permission:settings');
+Route::get('/provider/{provider}/edit', 'ProviderController@edit')->middleware('permission:settings');
+Route::post('/provider/{provider}/update', 'ProviderController@update')->middleware('permission:settings');
+Route::get('/provider/create', 'ProviderController@create')->middleware('permission:settings');
+Route::post('/provider/store', 'ProviderController@store')->middleware('permission:settings');

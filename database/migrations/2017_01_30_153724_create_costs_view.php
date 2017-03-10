@@ -47,7 +47,31 @@ class CreateCostsView extends Migration
             FROM
                 clients c
             INNER JOIN
-                import_adult_social_care_services asc01 ON asc01.client_id = c.id");
+                import_adult_social_care_services asc01 ON asc01.client_id = c.id
+
+
+
+            UNION
+
+            SELECT
+                c.id
+                ,c.surname
+                ,c.dob
+                ,c.postcode
+                ,f.display_name as 'service'
+                ,service_desc as 'service_type'
+                ,gs.cost_frequency as 'frequency'
+                ,start_date
+                ,end_date
+                ,gs.cost as 'unit_cost'
+            FROM
+                clients c
+            INNER JOIN
+                import_general_services gs ON gs.client_id = c.id
+            INNER JOIN
+                upload_log u ON u.id = gs.upload_id
+            INNER JOIN
+                file_types f ON f.id = u.filetype");
     }
 
     /**

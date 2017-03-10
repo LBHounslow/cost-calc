@@ -32,7 +32,7 @@
                 <select class="form-control" name="provider" id="provider" required>
 
                     @foreach($providers as $provider)
-                        <option {{ $user->provider_code == $provider->code ? ' selected="selected"' : '' }}
+                        <option {{ $user->provider_id == $provider->id ? ' selected="selected"' : '' }}
                                 value="{{ $provider->code }}">{{ $provider->display_name }}
                         </option>
                     @endforeach

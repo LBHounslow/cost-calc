@@ -33,7 +33,7 @@ class SuspendUserFromLockout
         $oldUser = [
             'name' => $user->name,
             'email' => $user->email,
-            'provider_code' => $user->provider_code,
+            'provider_id' => $user->provider_id,
             'permissions' => $user->permissions,
             'active' => $user->active,
         ];
@@ -44,7 +44,7 @@ class SuspendUserFromLockout
         $newUser = [
             'name' => $user->name,
             'email' => $user->email,
-            'provider_code' => $user->provider_code,
+            'provider_id' => $user->provider_id,
             'permissions' => $user->permissions,
             'active' => $user->active,
         ];

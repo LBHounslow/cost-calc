@@ -73,7 +73,7 @@ class UserController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'permissions' => json_encode($request->input('permissions')),
-            'provider_code' => $request->input('provider'),
+            'provider_id' => $request->input('provider'),
             'active' => 1,
         ]);
 
@@ -128,14 +128,14 @@ class UserController extends Controller
         $oldUser = [
             'name' => $user->name,
             'email' => $user->email,
-            'provider_code' => $user->provider_code,
+            'provider_id' => $user->provider_id,
             'permissions' => $user->permissions,
             'active' => $user->active,
 
         ];
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->provider_code = $request->input('provider');
+        $user->provider_id = $request->input('provider');
         $user->permissions = json_encode($request->input('permissions'));
 
         if ($request->input('active')) {
@@ -149,7 +149,7 @@ class UserController extends Controller
         $newUser = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'provider_code' => $request->input('provider'),
+            'provider_id' => $request->input('provider'),
             'permissions' => json_encode($request->input('permissions')),
             'active' => $user->active,
 

@@ -20,7 +20,7 @@ class Upload_log extends Model
      * @var array
      */
     protected $fillable = [
-        'original_filename', 'path', 'filetype', 'user_id', 'processed', 'status', 'error_msg', 'deleted',
+        'original_filename', 'path', 'filetype', 'user_id', 'processed', 'status', 'msg', 'deleted',
     ];
 
 
@@ -41,7 +41,7 @@ class Upload_log extends Model
 
     public function fileType()
     {
-        return $this->hasOne('App\FileType', 'code', 'filetype');
+        return $this->hasOne('App\FileType', 'id', 'filetype');
     }
 
     /**

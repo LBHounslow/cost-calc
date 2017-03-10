@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Provider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Requests;
 use App\FileType;
-use App\ImportModel;
-use App\ImportScript;
 use View;
 
-class FileTypeController extends Controller
+class ProviderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +19,8 @@ class FileTypeController extends Controller
      */
     public function index()
     {
-        $fileTypes = FileType::all();
-        return View::make('filetypes/index', ['fileTypes' => $fileTypes]);
+        $providers = Provider::all();
+        return View::make('providers/index', ['providers' => $providers]);
     }
 
     /**
@@ -31,10 +30,9 @@ class FileTypeController extends Controller
      */
     public function create()
     {
-        $importScripts = ImportScript::all();
-        $importModels = ImportModel::all();
+        $fileTypes = FileType::all();
+        return View::make('providers/create', ['fileTypes' => $fileTypes]);
 
-        return View::make('filetypes/create', ['importScripts' => $importScripts, 'importModels' => $importModels]);
     }
 
     /**
@@ -47,20 +45,18 @@ class FileTypeController extends Controller
     {
         $this->validate($request, [
             'displayName' => 'required|max:255',
-            'scriptPath' => 'required',
-            'modelPath' => 'required',
+            'allowedFileTypes' => 'required',
         ]);
 
-        $fileType = new FileType;
+        $fileType = new Provider;
         $fileType->create([
             'display_name' => $request->input('displayName'),
-            'import_script_id' => $request->input('scriptPath'),
-            'import_model_id' => $request->input('modelPath'),
+            'allowed_file_types' => json_encode($request->input('allowedFileTypes')),
         ]);
 
         flash('File Type successfully created');
 
-        return Redirect::to('/filetypes');
+        return Redirect::to('/providers');
     }
 
     /**
@@ -82,11 +78,10 @@ class FileTypeController extends Controller
      */
     public function edit($id)
     {
-        $importScripts = ImportScript::all();
-        $importModels = ImportModel::all();
+        $fileTypes = FileType::all();
 
-        $fileType = FileType::find($id);
-        return View::make('filetypes/edit', ['fileType' => $fileType, 'importScripts' => $importScripts, 'importModels' => $importModels]);
+        $provider = Provider::find($id);
+        return View::make('providers/edit', ['provider' => $provider, 'fileTypes' => $fileTypes]);
     }
 
     /**
@@ -100,19 +95,17 @@ class FileTypeController extends Controller
     {
         $this->validate($request, [
             'displayName' => 'required|max:255',
-            'scriptPath' => 'required',
-            'modelPath' => 'required',
+            'allowedFileTypes' => 'required',
         ]);
 
-        $fileType = FileType::find($id);
+        $provider = Provider::find($id);
 
-        $fileType->display_name = $request->input('displayName');
-        $fileType->import_script_id = $request->input('scriptPath');
-        $fileType->import_model_id = $request->input('modelPath');
-        $fileType->save();
+        $provider->display_name = $request->input('displayName');
+        $provider->allowed_file_types = json_encode($request->input('allowedFileTypes'));
+        $provider->save();
 
-        flash('File Type successfully updated');
-        return Redirect::to('/filetypes');
+        flash('Provider successfully updated');
+        return Redirect::to('/providers');
     }
 
     /**

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->json('permissions', 200);
-            $table->string('provider_code');
+            $table->string('provider_id');
             $table->integer('active')->default(1);
             $table->rememberToken();
             $table->timestamps();

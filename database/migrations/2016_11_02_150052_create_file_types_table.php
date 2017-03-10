@@ -15,7 +15,6 @@ class CreateFileTypesTable extends Migration
     {
         Schema::create('file_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code', 200);
             $table->string('display_name', 200);
             $table->integer('import_script_id');
             $table->integer('import_model_id');

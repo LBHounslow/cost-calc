@@ -16,8 +16,8 @@
             <div class="col-md-6">
                 <select class="form-control" name="fileType" id="fileType" required>
                     @foreach($fileTypes as $fileType)
-                        @if(in_array($fileType->code, Auth::user()->getAllowedFileTypes()))
-                            <option value="{{ $fileType->code }}">{{ $fileType->display_name }}</option>
+                        @if(in_array($fileType->id, Auth::user()->getAllowedFileTypes()))
+                            <option value="{{ $fileType->id }}">{{ $fileType->display_name }}</option>
                         @endif
                     @endforeach
                 </select>

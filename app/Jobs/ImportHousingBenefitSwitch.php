@@ -141,7 +141,7 @@ EOT;
         $uploadLogRecord = Upload_log::find($this->uploadedFile->id);
         $uploadLogRecord->processed = 1;
         $uploadLogRecord->status = 0;
-        $uploadLogRecord->error_msg = substr($exception->getMessage(), 0, 225);
+        $uploadLogRecord->msg = substr($exception->getMessage(), 0, 225);
         $uploadLogRecord->save();
         $this->deleteFile();
     }

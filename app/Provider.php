@@ -20,7 +20,7 @@ class Provider extends Model
      * @var array
      */
     protected $fillable = [
-        'display_name', 'allowed_file_types'
+        'display_name', 'allowed_file_types', 'code', 'allowed_file_types',
     ];
 
 

@@ -131,7 +131,7 @@ class UploadController extends Controller
 
 
         $uploadFileRecord->deleted = 1;
-        $uploadFileRecord->error_msg = 'File deleted by user ' . auth()->user()->id . ' - ' . $deletedRows . ' records were deleted';
+        $uploadFileRecord->msg = 'File deleted by user ' . auth()->user()->id . ' - ' . $deletedRows . ' records were deleted';
         $uploadFileRecord->save();
 
         flash($deletedRows . ' records were deleted');

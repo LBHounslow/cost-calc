@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'permissions' => '["uploadFile","reports","clientLookup","settings"]',
                 'active' => '1',
-                'provider_code' => 'hounslow-madm',
+                'provider_id' => 1,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]

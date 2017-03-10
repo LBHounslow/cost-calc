@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'permissions', 'status', 'provider_code',
+        'name', 'email', 'password', 'permissions', 'status', 'provider_id',
     ];
 
     /**
@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function provider()
     {
-        return $this->hasOne('App\Provider', 'code', 'provider_code');
+        return $this->hasOne('App\Provider', 'id', 'provider_id');
     }
 
     /**

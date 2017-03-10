@@ -27,7 +27,7 @@
             <th data-field="user_id" data-sortable="true" data-visible="false">User Id</th>
             <th data-field="processed" data-sortable="true" data-visible="false">Processed</th>
             <th data-field="status" data-sortable="true">Status</th>
-            <th data-width="40px" data-field="error_msg" data-sortable="true" data-visible="false">Error Message</th>
+            <th data-width="40px" data-field="msg" data-sortable="true" data-visible="false">Error Message</th>
             <th data-field="created_at" data-sortable="true">Date</th>
             <th data-sortable="true">Delete</th>
         </tr>
@@ -48,7 +48,7 @@
                     <td>{{ $uploadedFile->id }}</td>
                     <td>{{ $uploadedFile->original_filename }}</td>
                     <td>{{ $uploadedFile->path }}</td>
-                    <td>{{ $uploadedFile->filetype }}</td>
+                    <td>{{ $uploadedFile->fileType->display_name }}</td>
                     <td>{{ $uploadedFile->user_id }}</td>
                     <td>{{ $uploadedFile->processed }}</td>
                     <td>
@@ -63,7 +63,7 @@
                         @endif
 
                     </td>
-                    <td>{{ $uploadedFile->error_msg }}</td>
+                    <td>{{ $uploadedFile->msg }}</td>
                     <td>{{ $uploadedFile->created_at }}</td>
                     <td>
                         @if($uploadedFile->deleted == '0' && $uploadedFile->status == '1')
@@ -127,7 +127,7 @@
 
     <script>
         function showErrorMsgColumn() {
-            $('#user-login-table').bootstrapTable('showColumn', 'error_msg');
+            $('#user-login-table').bootstrapTable('showColumn', 'msg');
         }
     </script>
 

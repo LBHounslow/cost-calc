@@ -15,7 +15,6 @@ class CreateProvidersTable extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code', 200);
             $table->string('display_name', 200);
             $table->json('allowed_file_types', 200);
             $table->timestamps();

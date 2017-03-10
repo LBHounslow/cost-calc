@@ -13,7 +13,6 @@ class FileTypesTableSeeder extends Seeder
     public function run()
     {
         DB::table('file_types')->insert([
-                'code' => 'h01',
                 'display_name' => 'Temporary accommodation',
                 'import_script_id' => 1,
                 'import_model_id' => 1,
@@ -23,7 +22,6 @@ class FileTypesTableSeeder extends Seeder
         );
 
         DB::table('file_types')->insert([
-                'code' => 'asc01',
                 'display_name' => 'Adult social care services provided',
                 'import_script_id' => 2,
                 'import_model_id' => 2,
@@ -33,7 +31,6 @@ class FileTypesTableSeeder extends Seeder
         );
 
         DB::table('file_types')->insert([
-                'code' => 'rb03',
                 'display_name' => 'Housing Benefit Switch',
                 'import_script_id' => 3,
                 'import_model_id' => 3,
@@ -43,7 +40,6 @@ class FileTypesTableSeeder extends Seeder
         );
 
         DB::table('file_types')->insert([
-                'code' => 'tf01',
                 'display_name' => 'Troubled Families',
                 'import_script_id' => 4,
                 'import_model_id' => 4,

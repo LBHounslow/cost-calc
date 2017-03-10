@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('title')
-    File Types
+    Providers
 @endsection
 
 @section('content')
@@ -12,20 +12,16 @@
             <thead>
             <tr>
                 <th>Display Name</th>
-                <th>Script Path</th>
-                <th>Model Path</th>
                 <th></th>
             </tr>
             </thead>
 
             <tbody>
-            @foreach ($fileTypes as $fileType)
+            @foreach ($providers as $provider)
                 <tr>
-                    <td>{{ $fileType->display_name }}</td>
-                    <td>{{ $fileType->importScript->script_path }}</td>
-                    <td>{{ $fileType->importModel->model_path }}</td>
+                    <td>{{ $provider->display_name }}</td>
                     <td>
-                        <a href="/filetype/{{ $fileType->id }}/edit">
+                        <a href="/provider/{{ $provider->id }}/edit">
                             <button type="submit"
                                     class="btn btn-warning btn-sm">Edit
                             </button>
@@ -38,8 +34,8 @@
         </table>
     </div>
 
-    <a href="/filetype/create">
-        <button class="btn btn-primary">Create New File Type</button>
+    <a href="/provider/create">
+        <button class="btn btn-primary">Create New Provider</button>
     </a>
 
 @stop

@@ -32,7 +32,7 @@
             <div class="col-md-6">
                 <select class="form-control" name="provider" id="provider" required>
                     @foreach($providers as $provider)
-                        <option value="{{ $provider->code }}">{{ $provider->display_name }}</option>
+                        <option value="{{ $provider->id }}">{{ $provider->display_name }}</option>
                     @endforeach
                 </select>
             </div>
