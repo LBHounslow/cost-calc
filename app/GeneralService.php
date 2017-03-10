@@ -24,7 +24,7 @@ class GeneralService extends Model
         'address_1', 'address_2', 'address_3', 'address_4', 'postcode',
         'ni', 'nhs_no',
         'first_name', 'surname', 'dob',
-        'start_date', 'end_date', 'weekly_cost', 'service_desc',
+        'start_date', 'end_date', 'cost', 'cost_frequency', 'service_desc',
     ];
 
 
