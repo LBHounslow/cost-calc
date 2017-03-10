@@ -20,7 +20,7 @@ class CreateCostsView extends Migration
                 ,c.surname
                 ,c.dob
                 ,c.postcode
-                ,'Temporary Accommodation' as 'service'
+                ,f.display_name as 'service'
                 ,h01.prop_type as 'service_type'
                 ,'Weekly' as 'frequency'
                 ,h01.start_date
@@ -30,6 +30,10 @@ class CreateCostsView extends Migration
                 clients c
             INNER JOIN
                 import_housing_temp_accom h01 ON h01.client_id = c.id
+            INNER JOIN
+                upload_log u ON u.id = h01.upload_id
+            INNER JOIN
+                file_types f ON f.id = u.filetype
 
             UNION
 
@@ -38,7 +42,7 @@ class CreateCostsView extends Migration
                 ,c.surname
                 ,c.dob
                 ,c.postcode
-                ,'Adult Social Care' as 'service'
+                ,f.display_name as 'service'
                 ,COALESCE(asc01.primary_support_reason_category, asc01.service_type) as 'service_type'
                 ,asc01.frequency as 'frequency'
                 ,start_date
@@ -48,6 +52,10 @@ class CreateCostsView extends Migration
                 clients c
             INNER JOIN
                 import_adult_social_care_services asc01 ON asc01.client_id = c.id
+            INNER JOIN
+                upload_log u ON u.id = asc01.upload_id
+            INNER JOIN
+                file_types f ON f.id = u.filetype
 
 
 

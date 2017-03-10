@@ -13,7 +13,7 @@ class FileTypesTableSeeder extends Seeder
     public function run()
     {
         DB::table('file_types')->insert([
-                'display_name' => 'Temporary accommodation',
+                'display_name' => 'Temporary Accommodation',
                 'import_script_id' => 1,
                 'import_model_id' => 1,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -22,7 +22,7 @@ class FileTypesTableSeeder extends Seeder
         );
 
         DB::table('file_types')->insert([
-                'display_name' => 'Adult social care services provided',
+                'display_name' => 'Adult Social Care',
                 'import_script_id' => 2,
                 'import_model_id' => 2,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
