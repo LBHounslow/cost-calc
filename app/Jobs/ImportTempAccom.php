@@ -21,8 +21,7 @@ class ImportTempAccom extends TemplateImportScript implements ShouldQueue
      *
      * @return void
      */
-    public
-    function handle()
+    public function handle()
     {
         $fileId = $this->uploadedFile->id;
         $filePath = '/storage/app/' . $this->uploadedFile->path;

@@ -2,26 +2,10 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 
-class ImportModel extends \App\TemplateModel
+class TemplateModel extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'import_models';
-
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-
-    ];
-
 
     /**
      * Get the format for database stored dates.
