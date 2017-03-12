@@ -27,7 +27,7 @@
             <th data-field="user_id" data-sortable="true" data-visible="false">User Id</th>
             <th data-field="processed" data-sortable="true" data-visible="false">Processed</th>
             <th data-field="status" data-sortable="true">Status</th>
-            <th data-width="40px" data-field="msg" data-sortable="true" data-visible="false">Error Message</th>
+            <th data-width="40px" data-field="msg" data-sortable="true" data-visible="false">Further Info</th>
             <th data-field="created_at" data-sortable="true">Date</th>
             <th data-sortable="true">Delete</th>
         </tr>

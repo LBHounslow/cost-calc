@@ -33,11 +33,18 @@ class TemplateImportScript implements ShouldQueue
     public function markAsProcessed($fileId)
     {
         $uploadLogRecord = Upload_log::find($fileId);
-        $uploadLogRecord->processed = 1;
-        $uploadLogRecord->status = 1;
         $rowCount = $uploadLogRecord->fileType->importModel->model_path::where('upload_id', $fileId)->count();
-        $uploadLogRecord->msg = $rowCount . " rows inserted / updated";
-        $uploadLogRecord->save();
+
+        if ($rowCount == '0') {
+            throw new \Exception('0 records inserted / updated');
+        } else {
+            $uploadLogRecord->processed = 1;
+            $uploadLogRecord->status = 1;
+            $uploadLogRecord->msg = $rowCount . " records inserted / updated";
+            $uploadLogRecord->save();
+        }
+
+
     }
 
     public function insertClients()
