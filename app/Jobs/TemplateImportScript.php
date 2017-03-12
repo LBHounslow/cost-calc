@@ -35,6 +35,8 @@ class TemplateImportScript implements ShouldQueue
         $uploadLogRecord = Upload_log::find($fileId);
         $uploadLogRecord->processed = 1;
         $uploadLogRecord->status = 1;
+        $rowCount = $uploadLogRecord->fileType->importModel->model_path::where('upload_id', $fileId)->count();
+        $uploadLogRecord->msg = $rowCount . " rows inserted / updated";
         $uploadLogRecord->save();
     }
 
@@ -86,7 +88,6 @@ EOT;
     public function failed(Exception $exception)
     {
         $this->uploadedFile->FileType->importModel->model_path::where('upload_id', $this->uploadedFile->id)->delete();
-        //HousingTempAccom::where('upload_id', $this->uploadedFile->id)->delete();
         $uploadLogRecord = Upload_log::find($this->uploadedFile->id);
         $uploadLogRecord->processed = 1;
         $uploadLogRecord->status = 0;

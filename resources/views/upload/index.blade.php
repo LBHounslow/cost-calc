@@ -57,7 +57,7 @@
                         @elseif($uploadedFile->deleted == 1)
                             Deleted
                         @elseif($uploadedFile->status == '1')
-                            Success
+                            Success - {{ $uploadedFile->msg }}
                         @elseif($uploadedFile->status == '0')
                             <a onclick="showErrorMsgColumn()" style="cursor: pointer">Error</a>
                         @endif
