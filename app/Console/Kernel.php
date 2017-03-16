@@ -29,9 +29,9 @@ class Kernel extends ConsoleKernel
             ->everyMinute()
             ->withoutOverlapping();
 
-        $schedule->command('migrate:refresh --seed')
+        /*$schedule->command('migrate:refresh --seed')
             ->daily()
-            ->withoutOverlapping();
+            ->withoutOverlapping();*/
 
         $schedule->command('uploads:delete')
             ->daily()
