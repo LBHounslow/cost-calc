@@ -43,7 +43,7 @@ class CreateCostsView extends Migration
                 ,c.dob
                 ,c.postcode
                 ,f.display_name as 'service'
-                ,COALESCE(asc01.primary_support_reason_category, asc01.service_type) as 'service_type'
+                ,asc01.service_type as 'service_type'
                 ,asc01.frequency as 'frequency'
                 ,start_date
                 ,end_date
