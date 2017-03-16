@@ -9,7 +9,13 @@
             <!-- Filter -->
     <form>
         <div class="form-group">
-            <h4>Select Date Range:</h4>
+            <h4>
+                Select Date Range:
+                <span class="glyphicon glyphicon-info-sign tt" aria-hidden="true" data-toggle="tooltip"
+                      data-placement="right"
+                      title="Helper Text"></span>
+            </h4>
+
             <div class="input-daterange input-group" id="datepicker">
                 <input type="text" class="input-sm form-control" name="start"/>
                 <span class="input-group-addon">to</span>
@@ -17,7 +23,12 @@
             </div>
         </div>
         <div class="form-group">
-            <h4>Select Services:</h4>
+            <h4>
+                Select Services:
+                <span class="glyphicon glyphicon-info-sign tt" aria-hidden="true" data-toggle="tooltip"
+                      data-placement="right"
+                      title="Helper Text"></span>
+            </h4>
             <select multiple id="service-type-select" class="form-control multiselect">
                 @foreach ($serviceTypes as $serviceType)
                     <option value="{{ $serviceType->service }} - {{  $serviceType->service_type }}" selected="selected">

@@ -23,3 +23,8 @@ body {
 #user-login-table .deleteButton {
     cursor: pointer;
 }
+
+.tt {
+    font-size: 12px;
+    vertical-align: top;
+}
