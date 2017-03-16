@@ -7,9 +7,9 @@
     @section('content')
 
             <!-- Filter -->
-    <h3>Filter</h3>
     <form>
         <div class="form-group">
+            <h4>Select Date Range:</h4>
             <div class="input-daterange input-group" id="datepicker">
                 <input type="text" class="input-sm form-control" name="start"/>
                 <span class="input-group-addon">to</span>
@@ -17,6 +17,7 @@
             </div>
         </div>
         <div class="form-group">
+            <h4>Select Services:</h4>
             <select multiple id="service-type-select" class="form-control multiselect">
                 @foreach ($serviceTypes as $serviceType)
                     <option value="{{ $serviceType->service }} - {{  $serviceType->service_type }}" selected="selected">
@@ -27,45 +28,74 @@
         </div>
         <div class="form-group">
             <label class="radio-inline">
-                <input type="radio" name="serviceFilter" id="inlineRadio1" value="1" checked> A Service
+                <input type="radio" name="serviceFilter" id="inlineRadio1" value="1" checked> Any of the Services
             </label>
             <label class="radio-inline">
-                <input type="radio" name="serviceFilter" id="inlineRadio2" value="2"> All Services
+                <input type="radio" name="serviceFilter" id="inlineRadio2" value="2"> All of the Services
             </label>
         </div>
-        <div class="form-group">
-            <label class="radio-inline">
-                <input type="radio" name="tempFilter" id="inlineRadio1" value="1" checked> All
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="tempFilter" id="inlineRadio2" value="2"> Temp Accom Only
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="tempFilter" id="inlineRadio3" value="3"> Not Temp Accom
-            </label>
+        <hr>
+        <div>
+            <a data-toggle="collapse" href="#collapseExample"
+               aria-expanded="false" aria-controls="collapseExample" style="font-size: 10px;">
+                Advanced Client Reporting <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"
+                                                style="font-size: 10px;"></span>
+
+            </a>
         </div>
-        <div class="form-group">
-            <label class="radio-inline">
-                <input type="radio" name="troubledFilter" id="inlineRadio1" value="1" checked> All
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="troubledFilter" id="inlineRadio2" value="2"> Troubled Families Only
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="troubledFilter" id="inlineRadio3" value="3"> Not Troubled Families
-            </label>
+
+        <div class="collapse" id="collapseExample">
+            <div class="well">
+                <div>
+                    <br>
+                    <p>
+                        The following filters can be used to filter clients based on whether they have ever received the
+                        Service:
+                    </p>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <p>Temporary Accomodation:</p>
+                    <label class="radio-inline">
+                        <input type="radio" name="tempFilter" id="inlineRadio2" value="2"> Used Service
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="tempFilter" id="inlineRadio3" value="3"> Never Used Service
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="tempFilter" id="inlineRadio1" value="1" checked> Either
+                    </label>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <p>Troubled Families:</p>
+                    <label class="radio-inline">
+                        <input type="radio" name="troubledFilter" id="inlineRadio2" value="2"> Used Service
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="troubledFilter" id="inlineRadio3" value="3"> Never Used Service
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="troubledFilter" id="inlineRadio1" value="1" checked> Either
+                    </label>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <p>Housing Benefit Switch:</p>
+                    <label class="radio-inline">
+                        <input type="radio" name="hbSwitchFilter" id="inlineRadio2" value="2"> Used Service
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="hbSwitchFilter" id="inlineRadio3" value="3"> Never Used Service
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="hbSwitchFilter" id="inlineRadio1" value="1" checked> Either
+                    </label>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="radio-inline">
-                <input type="radio" name="hbSwitchFilter" id="inlineRadio1" value="1" checked> All
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="hbSwitchFilter" id="inlineRadio2" value="2"> Housing Benefit Switch Only
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="hbSwitchFilter" id="inlineRadio3" value="3"> Not Housing Benefit Switch
-            </label>
-        </div>
+        <hr>
+
         <button type="button" id="total-spend-btn" class="btn btn-primary">Apply Filter</button>
         <!--<button type="button" id="total-spend-btn" class="btn btn-primary">Loading...<img src="/img/spin.gif"
                                                                                           width="22px"></button>-->
