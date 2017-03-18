@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('title')
-    Providers
+    <a href="/settings">Settings</a> > Providers
 @endsection
 
 @section('content')

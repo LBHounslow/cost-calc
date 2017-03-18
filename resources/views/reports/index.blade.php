@@ -48,9 +48,9 @@
         <hr>
         <div>
             <a data-toggle="collapse" href="#collapseExample"
-               aria-expanded="false" aria-controls="collapseExample" style="font-size: 10px;">
+               aria-expanded="false" aria-controls="collapseExample" style="font-size: 14px;">
                 Advanced Client Reporting <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"
-                                                style="font-size: 10px;"></span>
+                                                style="font-size: 14px;"></span>
 
             </a>
         </div>

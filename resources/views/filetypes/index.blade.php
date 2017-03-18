@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('title')
-    File Types
+    <a href="/settings">Settings</a> > File Types
 @endsection
 
 @section('content')

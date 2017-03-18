@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('title')
-    User Login Log
+    <a href="/settings">Settings</a> > User Login Log
 @endsection
 
 @section('content')

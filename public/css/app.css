@@ -28,3 +28,15 @@ body {
     font-size: 12px;
     vertical-align: top;
 }
+
+.panel-body {
+    font-size: 18px;
+}
+
+.panel-heading {
+    font-size: 22px;
+}
+
+.settingsNav a {
+    font-size: 18px;
+}

@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('title')
-    User Administration
+    <a href="/settings">Settings</a> > User Administration
 @endsection
 
 @section('content')

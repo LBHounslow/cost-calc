@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="btn-group-vertical" role="group">
+    <div class="btn-group-vertical settingsNav" role="group">
 
         <a class="btn btn-default" href="/users" role="button" style="text-align:left;">
             <i class="fa fa-users"></i> User Administration
