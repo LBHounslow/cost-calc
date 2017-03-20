@@ -1,22 +1,26 @@
-# Multi Agency Data Model for Hounslow
+# Cost Calculator
 
 ## Overview
 
-The Hounslow "Multi Agency Demand Management" (MADM) Tool is a system for Council Service Providers (internal or external) to upload cost data associated to service use (e.g. the cost of Temporary Accommodation / Adult Social Care) and run reports on that data.
+The Cost Calculator is a web based intelligence tool designed to support local authorities in analysing the use of the services they provide. It uses the cost of service provision as the primary measure of service use. 
 
-It is a website with User Management / Authentication, File Upload Capabilities, and Online Reporting.
+The tool is capable of:
+- processing data sets that contain financial information about the users of services;
+- matching individuals across the different data sets to produce a "client index", which is used to calculate all costs associated with those clients;
+- producing three types of reports about service use, which can be filtered in different ways to aid analysis.
 
-The tool collates the cost data and matches individuals across the different data sets, so that you can end up with a "Resident Index" and all costs associated to those Residents.
+The three types of included report are:
+- Total Spend by Client
+- Breakdown of Spend by Client
+- Total Spend by Service
 
-It runs analysis on the data and provides the following Online Reports:
+The tool operates as a web application and includes user management and authentication features, the ability to assign different user permissions, and file upload capabilities.
 
-* Total Spend by Resident
-* Breakdown of Spend by Resident
-* Total Spend by Service
+The objective of the tool is to facilitate those working in local authorities and other public services to be able to analyse financial information and to gain an understanding of the pattern of service use of an individual, or group of individuals, beyond one particular service. 
 
 ## Project Documentation
 
-https://github.com/jacksegal/hounslow-madm/wiki
+https://github.com/LBHounslow/cost-calc/wiki
 
 ## Laravel Documentation
 
