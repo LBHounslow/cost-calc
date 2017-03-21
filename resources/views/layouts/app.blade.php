@@ -100,6 +100,9 @@
                             <a href="/settings"><i class="fa fa-cog"></i></a>
                         </li>
                     @endif
+                    <li data-toggle="tooltip" data-placement="bottom" title="Help">
+                        <a href="/help"><i class="fa fa-question-circle"></i></a>
+                    </li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -11,9 +11,6 @@
         <div class="form-group">
             <h4>
                 Select Date Range:
-                <span class="glyphicon glyphicon-info-sign tt" aria-hidden="true" data-toggle="tooltip"
-                      data-placement="right"
-                      title="Helper Text"></span>
             </h4>
 
             <div class="input-daterange input-group" id="datepicker">
@@ -25,9 +22,6 @@
         <div class="form-group">
             <h4>
                 Select Services:
-                <span class="glyphicon glyphicon-info-sign tt" aria-hidden="true" data-toggle="tooltip"
-                      data-placement="right"
-                      title="Helper Text"></span>
             </h4>
             <select multiple id="service-type-select" class="form-control multiselect">
                 @foreach ($serviceTypes as $serviceType)
@@ -41,9 +35,18 @@
             <label class="radio-inline">
                 <input type="radio" name="serviceFilter" id="inlineRadio1" value="1" checked> Any of the Services
             </label>
+            <span class="glyphicon glyphicon-info-sign tt" aria-hidden="true" data-toggle="tooltip"
+                  data-placement="right"
+                  title="Select “Any of the services” if you want to look at clients who use any of the services you’ve selected.">
+            </span>
             <label class="radio-inline">
                 <input type="radio" name="serviceFilter" id="inlineRadio2" value="2"> All of the Services
             </label>
+            <span class="glyphicon glyphicon-info-sign tt" aria-hidden="true" data-toggle="tooltip"
+                  data-placement="right"
+                  title="Select “All of the services” if you want to look at clients who only use all the services you have selected.">
+            </span>
+
         </div>
         <hr>
         <div>
@@ -61,7 +64,8 @@
                     <br>
                     <p>
                         The following filters can be used to filter clients based on whether they have ever received the
-                        Service:
+                        Service. Please note these filters are not affected by any date ranges. They simply show whether
+                        a client has ever used a service or not:
                     </p>
                     <br>
                 </div>
@@ -74,7 +78,7 @@
                         <input type="radio" name="tempFilter" id="inlineRadio3" value="3"> Never Used Service
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="tempFilter" id="inlineRadio1" value="1" checked> Either
+                        <input type="radio" name="tempFilter" id="inlineRadio1" value="1" checked> All
                     </label>
                 </div>
                 <hr>
@@ -87,7 +91,7 @@
                         <input type="radio" name="troubledFilter" id="inlineRadio3" value="3"> Never Used Service
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="troubledFilter" id="inlineRadio1" value="1" checked> Either
+                        <input type="radio" name="troubledFilter" id="inlineRadio1" value="1" checked> All
                     </label>
                 </div>
                 <hr>
@@ -100,7 +104,7 @@
                         <input type="radio" name="hbSwitchFilter" id="inlineRadio3" value="3"> Never Used Service
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="hbSwitchFilter" id="inlineRadio1" value="1" checked> Either
+                        <input type="radio" name="hbSwitchFilter" id="inlineRadio1" value="1" checked> All
                     </label>
                 </div>
             </div>
@@ -254,7 +258,8 @@
 
         /* Initiate Multi Select Plugin */
         $('.multiselect').multiselect({
-            includeSelectAllOption: true
+            includeSelectAllOption: true,
+            selectAllText: 'Select/De-select all'
         });
 
         /* Initiate Date Picker Plugin */

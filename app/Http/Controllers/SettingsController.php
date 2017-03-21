@@ -28,4 +28,9 @@ class SettingsController extends Controller
 
         return View::make('settings/userChange', ['userChanges' => $userChanges]);
     }
+
+    public function getHelp()
+    {
+        return View::make('settings/help', []);
+    }
 }
