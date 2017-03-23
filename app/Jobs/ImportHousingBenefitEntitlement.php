@@ -10,12 +10,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Storage;
 
 use Exception;
-use App\HousingBenefitEntitlement;
+use App\HousingBenefitEntitle;
 use Excel;
 use App\Upload_log;
 use App\Jobs\TemplateImportScript;
 
-class ImportHousingBenefitEntitlement extends TemplateImportScript implements ShouldQueue
+class ImportHousingBenefitEntitle extends TemplateImportScript implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
@@ -71,7 +71,7 @@ class ImportHousingBenefitEntitlement extends TemplateImportScript implements Sh
                 // } else {
 
                 // create new record
-                HousingBenefitEntitlement::create([
+                HousingBenefitEntitle::create([
                     'upload_id' => $fileId,
                     'claim_ref' => $row['housing_benefit_claim_reference_number'] ?? null,
                     'address_1' => $row['claimants_address_line_1'] ?? null,

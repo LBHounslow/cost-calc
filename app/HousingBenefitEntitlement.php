@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HousingBenefitEntitlement extends \App\TemplateModel
+class HousingBenefitEntitle extends \App\TemplateModel
 {
     /**
      * The table associated with the model.
