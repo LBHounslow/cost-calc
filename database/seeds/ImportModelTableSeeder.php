@@ -41,7 +41,7 @@ class ImportModelTableSeeder extends Seeder
         );
 
         DB::table('import_models')->insert([
-                'script_path' => 'App\HousingBenefitEntitlement',
+                'model_path' => 'App\HousingBenefitEntitlement',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]
