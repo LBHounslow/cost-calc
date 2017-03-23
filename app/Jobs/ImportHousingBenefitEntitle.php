@@ -14,20 +14,11 @@ use App\HousingBenefitEntitle;
 use Excel;
 use App\Upload_log;
 use App\Jobs\TemplateImportScript;
+use Carbon\Carbon;
 
 class ImportHousingBenefitEntitle extends TemplateImportScript implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
-
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
     /**
      * Execute the job.
@@ -70,6 +61,12 @@ class ImportHousingBenefitEntitle extends TemplateImportScript implements Should
                 // do nothing
                 // } else {
 
+
+                $dob = new Carbon($row['claimants_date_of_birth']);
+                $startDate = new Carbon($row['hb_claim_entitlement_start_date']);
+                $endDate = new Carbon($row['snapshot_date']);
+
+
                 // create new record
                 HousingBenefitEntitle::create([
                     'upload_id' => $fileId,
@@ -83,9 +80,9 @@ class ImportHousingBenefitEntitle extends TemplateImportScript implements Should
                     'title' => $row['claimants_title'] ?? null,
                     'first_name' => $row['claimants_first_forename'] ?? null,
                     'surname' => $row['claimants_surname'] ?? null,
-                    'dob' => $row['claimants_date_of_birth'] ?? null,
-                    'start_date' => $row['hb_claim_entitlement_start_date'] ?? null,
-                    'end_date' => $row['snapshot_date'] ?? null,
+                    'dob' => $dob ?? null,
+                    'start_date' => $startDate ?? null,
+                    'end_date' => $endDate ?? null,
                     'weekly_housing_benefit_entitlement' => $row['weekly_housing_benefit_entitlement'] ?? null,
                     'weekly_eligible_rent_amount' => $row['weekly_eligible_rent_amount'] ?? null,
                     'contractual_rent_amount' => $row['contractual_rent_amount'] ?? null,
