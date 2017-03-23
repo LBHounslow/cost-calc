@@ -42,6 +42,13 @@ class ImportScriptTableSeeder extends Seeder
         );
 
         DB::table('import_scripts')->insert([
+                'script_path' => 'App\Jobs\ImportHousingBenefitEntitle',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ]
+        );
+
+        DB::table('import_scripts')->insert([
                 'script_path' => 'App\Jobs\ImportGeneralService',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
