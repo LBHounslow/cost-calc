@@ -14,7 +14,7 @@ class ProvidersTableSeeder extends Seeder
     {
         DB::table('providers')->insert([
                 'display_name' => 'Hounslow MADM',
-                'allowed_file_types' => '["1","2", "3", "4"]',
+                'allowed_file_types' => '["1","2", "3", "4", "5"]',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]

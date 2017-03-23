@@ -48,5 +48,14 @@ class FileTypesTableSeeder extends Seeder
             ]
         );
 
+        DB::table('file_types')->insert([
+                'display_name' => 'Housing Benefit Entitlement',
+                'import_script_id' => 5,
+                'import_model_id' => 5,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ]
+        );
+
     }
 }
