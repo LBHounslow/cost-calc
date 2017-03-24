@@ -44,56 +44,68 @@ class ImportHousingBenefitEntitle extends TemplateImportScript implements Should
                 }
 
                 $mandatoryColumns = [
-                    'nino',
-                    'dob',
-                    'lastname',
-                    'postcode',
+                    'housing_benefit_claim_reference_number',
+                    'claimants_date_of_birth',
+                    'claimants_surname',
+                    'claimants_postcode',
                 ];
 
-                //if ($this->checkMandatoryColumns($mandatoryColumns, $row) && $emptyRow === false) {
+                if ($this->checkMandatoryColumns($mandatoryColumns, $row) && $emptyRow === false) {
 
-                // check if we have record already
-                /*$existingRecord = HousingBenefitEntitlement::where([
-                    ['ni', $row['nino'] ?? null],
-                ])->first();*/
+                    // check if we have record already
+                    $existingRecord = HousingBenefitEntitle::where([
+                        ['claim_ref', $row['housing_benefit_claim_reference_number'] ?? null],
+                    ])->first();
 
-                //if (isset($existingRecord->id)) {
-                // do nothing
-                // } else {
+                    if (isset($existingRecord->id)) {
 
+                        $newDate = new Carbon($row['snapshot_date']);
+                        $existDate = new Carbon($existingRecord->end_date);
 
-                $dob = new Carbon($row['claimants_date_of_birth']);
-                $startDate = new Carbon($row['hb_claim_entitlement_start_date']);
-                $endDate = new Carbon($row['snapshot_date']);
+                        if ($newDate->gt($existDate)) {
 
+                            // update end date
+                            $existingRecord->end_date = $newDate;
+                            $existingRecord->upload_id = $fileId;
+                            $existingRecord->save();
 
-                // create new record
-                HousingBenefitEntitle::create([
-                    'upload_id' => $fileId,
-                    'claim_ref' => $row['housing_benefit_claim_reference_number'] ?? null,
-                    'address_1' => $row['claimants_address_line_1'] ?? null,
-                    'address_2' => $row['claimants_address_line_2'] ?? null,
-                    'address_3' => $row['claimants_address_line_3'] ?? null,
-                    'address_4' => $row['claimants_address_line_4'] ?? null,
-                    'postcode' => $row['claimants_postcode'] ?? null,
-                    'ni' => $row['claimants_national_insurance_number'] ?? null,
-                    'title' => $row['claimants_title'] ?? null,
-                    'first_name' => $row['claimants_first_forename'] ?? null,
-                    'surname' => $row['claimants_surname'] ?? null,
-                    'dob' => $dob ?? null,
-                    'start_date' => $startDate ?? null,
-                    'end_date' => $endDate ?? null,
-                    'weekly_housing_benefit_entitlement' => $row['weekly_housing_benefit_entitlement'] ?? null,
-                    'weekly_eligible_rent_amount' => $row['weekly_eligible_rent_amount'] ?? null,
-                    'contractual_rent_amount' => $row['contractual_rent_amount'] ?? null,
-                    'time_period_contractual_rent_figure_covers' => $row['time_period_contractual_rent_figure_covers'] ?? null,
-                    'tenancy_type' => $row['tenancy_type'] ?? null,
-                ]);
-                //}
+                        } else {
+                            // do nothing...
+                        }
 
-                //} else {
-                // do nothing...
-                //}
+                    } else {
+
+                        $dob = new Carbon($row['claimants_date_of_birth']);
+                        $startDate = new Carbon($row['hb_claim_entitlement_start_date']);
+                        $endDate = new Carbon($row['snapshot_date']);
+
+                        // create new record
+                        HousingBenefitEntitle::create([
+                            'upload_id' => $fileId,
+                            'claim_ref' => $row['housing_benefit_claim_reference_number'] ?? null,
+                            'address_1' => $row['claimants_address_line_1'] ?? null,
+                            'address_2' => $row['claimants_address_line_2'] ?? null,
+                            'address_3' => $row['claimants_address_line_3'] ?? null,
+                            'address_4' => $row['claimants_address_line_4'] ?? null,
+                            'postcode' => $row['claimants_postcode'] ?? null,
+                            'ni' => $row['claimants_national_insurance_number'] ?? null,
+                            'title' => $row['claimants_title'] ?? null,
+                            'first_name' => $row['claimants_first_forename'] ?? null,
+                            'surname' => $row['claimants_surname'] ?? null,
+                            'dob' => $dob ?? null,
+                            'start_date' => $startDate ?? null,
+                            'end_date' => $endDate ?? null,
+                            'weekly_housing_benefit_entitlement' => $row['weekly_housing_benefit_entitlement'] ?? null,
+                            'weekly_eligible_rent_amount' => $row['weekly_eligible_rent_amount'] ?? null,
+                            'contractual_rent_amount' => $row['contractual_rent_amount'] ?? null,
+                            'time_period_contractual_rent_figure_covers' => $row['time_period_contractual_rent_figure_covers'] ?? null,
+                            'tenancy_type' => $row['tenancy_type'] ?? null,
+                        ]);
+                    }
+
+                } else {
+                    // do nothing...
+                }
             });
         });
 

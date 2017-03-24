@@ -17,7 +17,7 @@ class CreateHousingBenefitEntitlementsTable extends Migration
             $table->increments('id');
             $table->integer('client_id')->nullable()->index();
             $table->integer('upload_id');
-            $table->string('claim_ref', 200)->nullable();
+            $table->integer('claim_ref')->nullable()->index();
             $table->string('address_1', 200)->nullable();
             $table->string('address_2', 200)->nullable();
             $table->string('address_3', 200)->nullable();
