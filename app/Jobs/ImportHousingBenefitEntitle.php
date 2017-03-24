@@ -95,9 +95,9 @@ class ImportHousingBenefitEntitle extends TemplateImportScript implements Should
                             'dob' => $dob ?? null,
                             'start_date' => $startDate ?? null,
                             'end_date' => $endDate ?? null,
-                            'weekly_housing_benefit_entitlement' => $row['weekly_housing_benefit_entitlement'] ?? null,
-                            'weekly_eligible_rent_amount' => $row['weekly_eligible_rent_amount'] ?? null,
-                            'contractual_rent_amount' => $row['contractual_rent_amount'] ?? null,
+                            'weekly_housing_benefit_entitlement' => ($row['weekly_housing_benefit_entitlement'] / 52) ?? null,
+                            'weekly_eligible_rent_amount' => ($row['weekly_eligible_rent_amount'] / 52) ?? null,
+                            'contractual_rent_amount' => ($row['contractual_rent_amount'] / 52) ?? null,
                             'time_period_contractual_rent_figure_covers' => $row['time_period_contractual_rent_figure_covers'] ?? null,
                             'tenancy_type' => $row['tenancy_type'] ?? null,
                         ]);

@@ -79,6 +79,31 @@ class CreateCostsView extends Migration
             INNER JOIN
                 upload_log u ON u.id = gs.upload_id
             INNER JOIN
+                file_types f ON f.id = u.filetype
+
+
+
+            UNION
+
+
+            SELECT
+                c.id
+                ,c.surname
+                ,c.dob
+                ,c.postcode
+                ,f.display_name as 'service'
+                ,'Housing Benefit Entitlement' as 'service_type'
+                ,'Weekly' as 'frequency'
+                ,start_date
+                ,end_date
+                ,shbe.weekly_housing_benefit_entitlement  as 'unit_cost'
+            FROM
+                clients c
+            INNER JOIN
+                import_housing_benefit_entitle shbe ON shbe.client_id = c.id
+            INNER JOIN
+                upload_log u ON u.id = shbe.upload_id
+            INNER JOIN
                 file_types f ON f.id = u.filetype");
     }
 
