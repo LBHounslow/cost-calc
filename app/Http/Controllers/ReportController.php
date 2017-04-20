@@ -53,7 +53,8 @@ class ReportController extends Controller
     private function executeQuery($query)
     {
         if (env('DB_CONNECTION', false) == 'mysql') {
-            return [];
+            $result = DB::select(DB::raw($query));
+            return $result;
         } else {
             DB::connection()->setFetchMode(\PDO::FETCH_ASSOC);
             $result = DB::select(DB::raw($query));
