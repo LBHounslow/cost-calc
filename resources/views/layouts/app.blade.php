@@ -30,7 +30,9 @@
                 'csrfToken' => csrf_token(),
         ]); ?>;
 
-        var baseUrl = "<?php echo secure_url('/'); ?>";
+        // var baseUrl = "<?php echo secure_url('/'); ?>";
+        baseUrl = "<?php echo env('APP_URL') . '/'; ?>";
+        
     </script>
 
     <!-- Select 2 -->
