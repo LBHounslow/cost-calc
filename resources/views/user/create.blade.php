@@ -78,3 +78,24 @@
     </form>
 
 @endsection
+
+
+@section('headerScripts')
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
+    @endsection
+
+
+    @section('footerScripts')
+
+            <!-- Multi Select plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+    <script type="text/javascript">
+
+        /* Initiate Multi Select Plugin */
+        $('.multiselect').multiselect({
+            includeSelectAllOption: true
+        });
+    </script>
+
+@endsection

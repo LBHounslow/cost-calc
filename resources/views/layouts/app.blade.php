@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Cost Calculator')) }}</title>
+    <title>{{ config('app.name', 'Cost Calculator') }}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -54,10 +54,10 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-              <?php
-              if (null !== env('APP_BRAND')) {
-                echo '<img src="'. env('APP_BRAND') . '" width="170" height="45" alt="' . env('APP_NAME') .'" >';
-              } ?>
+                <?php
+                if (null !== env('APP_BRAND')) {
+                    echo '<img src="' . env('APP_BRAND') . '" width="170" height="45" alt="' . env('APP_NAME') . '" >';
+                } ?>
             </a>
         </div>
 

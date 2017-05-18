@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use View;
+use App\FileType;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 
@@ -12,6 +13,7 @@ class ReportController extends Controller
 
     public function index()
     {
+        $fileTypes = FileType::all();
         $serviceTypes = $this->getServiceTypes(null, true);
         $spendByClients = $this->getSpendByClient(null, true);
         $spendByServices = $this->getSpendByService(null, true);
@@ -21,6 +23,7 @@ class ReportController extends Controller
             'serviceTypes' => $serviceTypes,
             'spendByServicesArr' => $spendByServices,
             'spendByServices' => $spendByServices,
+            'fileTypes' => $fileTypes,
         ]);
     }
 
@@ -53,13 +56,58 @@ class ReportController extends Controller
     private function executeQuery($query)
     {
         if (env('DB_CONNECTION', false) == 'mysql') {
-            $result = DB::select(DB::raw($query));
-            return $result;
+            //$result = DB::select(DB::raw($query));
+            return [];
         } else {
             DB::connection()->setFetchMode(\PDO::FETCH_ASSOC);
             $result = DB::select(DB::raw($query));
             return $result;
         }
+    }
+
+    private function createFileTypeFilterClause($fileTypeFilters)
+    {
+        $fileTypeFilters = json_decode($fileTypeFilters);
+        $sql = '';
+        foreach ($fileTypeFilters as $fileTypeFilter) {
+
+            $fileType = FileType::find($fileTypeFilter->key);
+            $displayName = $fileType->display_name;
+            $model = new $fileType->importModel->model_path();
+            $importTable = $model->getTable();
+
+            if ($fileTypeFilter->key === '5') {
+                $inQuery = "
+                    SELECT
+                        client_id
+                    FROM
+                        $importTable t
+                    INNER JOIN
+                        upload_log u ON u.id = t.upload_id
+                    INNER JOIN
+                        file_types f ON f.id = u.filetype
+                    WHERE
+                        f.display_name = '$displayName' ";
+            } else {
+                $inQuery = " SELECT client_id FROM $importTable t";
+            }
+
+            if (isset($fileTypeFilter->val) && $fileTypeFilter->val === '1') {
+                // all
+                $sql .= " AND 1 = 1";
+            } elseif (isset($fileTypeFilter->val) && $fileTypeFilter->val === '2') {
+                // only temp
+                $sql .= " AND id IN ($inQuery)";
+            } elseif (isset($fileTypeFilter->val) && $fileTypeFilter->val === '3') {
+                // not temp
+                $sql .= " AND id NOT IN ($inQuery)";
+            } else {
+                $sql .= " AND 2 = 2";
+            }
+
+        }
+
+        return $sql;
     }
 
 
@@ -77,46 +125,9 @@ class ReportController extends Controller
             $whereClause = "WHERE 1=2 ";
         }
 
-        /* Temp Accom Filter */
-        if (isset($request) && $request->input('tempFilter') === '1') {
-            // all
-            $whereClause .= " AND 1 = 1";
-        } elseif (isset($request) && $request->input('tempFilter') === '2') {
-            // only temp
-            $whereClause .= " AND id IN (select client_id from import_housing_temp_accom)";
-        } elseif (isset($request) && $request->input('tempFilter') === '3') {
-            // not temp
-            $whereClause .= " AND id NOT IN (select client_id from import_housing_temp_accom)";
-        } else {
-            $whereClause .= " AND 2 = 2";
-        }
-
-        /* Troubled Families Filter */
-        if (isset($request) && $request->input('troubledFilter') === '1') {
-            // all
-            $whereClause .= " AND 1 = 1";
-        } elseif (isset($request) && $request->input('troubledFilter') === '2') {
-            // only temp
-            $whereClause .= " AND id IN (select client_id from import_troubled_families)";
-        } elseif (isset($request) && $request->input('troubledFilter') === '3') {
-            // not temp
-            $whereClause .= " AND id NOT IN (select client_id from import_troubled_families)";
-        } else {
-            $whereClause .= " AND 2 = 2";
-        }
-
-        /* Housing Benefit Switch Filter */
-        if (isset($request) && $request->input('hbSwitchFilter') === '1') {
-            // all
-            $whereClause .= " AND 1 = 1";
-        } elseif (isset($request) && $request->input('hbSwitchFilter') === '2') {
-            // only temp
-            $whereClause .= " AND id IN (select client_id from import_housing_benefit_switch)";
-        } elseif (isset($request) && $request->input('hbSwitchFilter') === '3') {
-            // not temp
-            $whereClause .= " AND id NOT IN (select client_id from import_housing_benefit_switch)";
-        } else {
-            $whereClause .= " AND 2 = 2";
+        /* File Type Filter */
+        if (isset($request) && $request->input('fileTypeFilter')) {
+            $whereClause .= $this->createFileTypeFilterClause($request->input('fileTypeFilter'));
         }
 
         /* Date Filter */
@@ -148,46 +159,9 @@ class ReportController extends Controller
             $whereClause = "WHERE 1=2 ";
         }
 
-        /* Temp Accom Filter */
-        if (isset($request) && $request->input('tempFilter') === '1') {
-            // all
-            $whereClause .= " AND 1 = 1";
-        } elseif (isset($request) && $request->input('tempFilter') === '2') {
-            // only temp
-            $whereClause .= " AND id IN (select client_id from import_housing_temp_accom)";
-        } elseif (isset($request) && $request->input('tempFilter') === '3') {
-            // not temp
-            $whereClause .= " AND id NOT IN (select client_id from import_housing_temp_accom)";
-        } else {
-            $whereClause .= " AND 2 = 2";
-        }
-
-        /* Troubled Families Filter */
-        if (isset($request) && $request->input('troubledFilter') === '1') {
-            // all
-            $whereClause .= " AND 1 = 1";
-        } elseif (isset($request) && $request->input('troubledFilter') === '2') {
-            // only temp
-            $whereClause .= " AND id IN (select client_id from import_troubled_families)";
-        } elseif (isset($request) && $request->input('troubledFilter') === '3') {
-            // not temp
-            $whereClause .= " AND id NOT IN (select client_id from import_troubled_families)";
-        } else {
-            $whereClause .= " AND 2 = 2";
-        }
-
-        /* Housing Benefit Switch Filter */
-        if (isset($request) && $request->input('hbSwitchFilter') === '1') {
-            // all
-            $whereClause .= " AND 1 = 1";
-        } elseif (isset($request) && $request->input('hbSwitchFilter') === '2') {
-            // only temp
-            $whereClause .= " AND id IN (select client_id from import_housing_benefit_switch)";
-        } elseif (isset($request) && $request->input('hbSwitchFilter') === '3') {
-            // not temp
-            $whereClause .= " AND id NOT IN (select client_id from import_housing_benefit_switch)";
-        } else {
-            $whereClause .= " AND 2 = 2";
+        /* File Type Filter */
+        if (isset($request) && $request->input('fileTypeFilter')) {
+            $whereClause .= $this->createFileTypeFilterClause($request->input('fileTypeFilter'));
         }
 
         /* Date Filter */
@@ -241,7 +215,7 @@ class ReportController extends Controller
 
     public function getServiceTypes()
     {
-        $result = DB::select(DB::raw("SELECT DISTINCT service, service_type FROM Costs;"));
+        $result = DB::select(DB::raw("SELECT DISTINCT service, service_type FROM Costs ORDER BY service, service_type ASC;"));
         return $result;
     }
 

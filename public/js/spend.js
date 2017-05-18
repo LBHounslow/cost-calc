@@ -12,33 +12,36 @@ var Spend = {
         /* get the filter values */
         dateRange = this.getDateRange();
         serviceTypes = this.getServiceTypes();
-        tempFilter = this.getTempAccomFilter();
-        troubledFilter = this.getTroubledFilter();
-        hbSwitchFilter = this.getHbSwitchFilter();
+        //tempFilter = this.getTempAccomFilter();
+        //troubledFilter = this.getTroubledFilter();
+        //hbSwitchFilter = this.getHbSwitchFilter();
         serviceFilter = this.getServiceFilter();
+        fileTypeFilter = this.getFileTypeFilter();
 
         /* save them to object for easy retrieval */
         this.filter = {
             startDate: moment(dateRange.startDate).format('YYYY-MM-DD'),
             endDate: moment(dateRange.endDate).format('YYYY-MM-DD'),
             serviceTypes: encodeURI(serviceTypes),
-            tempFilter: tempFilter,
-            troubledFilter: troubledFilter,
-            hbSwitchFilter: hbSwitchFilter,
+            //tempFilter: tempFilter,
+            //troubledFilter: troubledFilter,
+            //hbSwitchFilter: hbSwitchFilter,
             serviceFilter: serviceFilter,
+            fileTypeFilter: fileTypeFilter,
         };
     },
 
     getSpendByClients: function (callback) {
 
         var params = [
-            {tempFilter: this.filter.tempFilter},
-            {troubledFilter: this.filter.troubledFilter},
-            {hbSwitchFilter: this.filter.hbSwitchFilter},
+            //{tempFilter: this.filter.tempFilter},
+            //{troubledFilter: this.filter.troubledFilter},
+            //{hbSwitchFilter: this.filter.hbSwitchFilter},
             {serviceFilter: this.filter.serviceFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
+            {fileTypeFilter: JSON.stringify(this.filter.fileTypeFilter)},
         ];
 
         var baseUrl = "/reports/spend-by-client";
@@ -65,13 +68,14 @@ var Spend = {
     getSpendByServices: function (callback) {
 
         var params = [
-            {tempFilter: this.filter.tempFilter},
-            {troubledFilter: this.filter.troubledFilter},
-            {hbSwitchFilter: this.filter.hbSwitchFilter},
+            //{tempFilter: this.filter.tempFilter},
+            //{troubledFilter: this.filter.troubledFilter},
+            //{hbSwitchFilter: this.filter.hbSwitchFilter},
             {serviceFilter: this.filter.serviceFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
+            {fileTypeFilter: JSON.stringify(this.filter.fileTypeFilter)},
         ];
 
         var baseUrl = "/reports/spend-by-service";
@@ -98,13 +102,14 @@ var Spend = {
 
         var params = [
             {clientId: clientId},
-            {tempFilter: this.filter.tempFilter},
-            {troubledFilter: this.filter.troubledFilter},
-            {hbSwitchFilter: this.filter.hbSwitchFilter},
+            //{tempFilter: this.filter.tempFilter},
+            //{troubledFilter: this.filter.troubledFilter},
+            //{hbSwitchFilter: this.filter.hbSwitchFilter},
             {serviceFilter: this.filter.serviceFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
+            {fileTypeFilter: JSON.stringify(this.filter.fileTypeFilter)},
         ];
 
         var baseUrl = "/reports/client-spend";
@@ -164,6 +169,15 @@ var Spend = {
 
     getServiceFilter: function () {
         return $('input[name=serviceFilter]:checked').val();
+    },
+
+    getFileTypeFilter: function () {
+        return $('input.fileTypeFilter:checked').map(function () {
+            return {
+                key: this.name,
+                val: $(this).val()
+            }
+        }).get();
     },
 
     generateUrlWithGetParams: function (baseUrl, params) {

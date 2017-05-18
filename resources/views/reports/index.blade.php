@@ -69,6 +69,31 @@
                     </p>
                     <br>
                 </div>
+
+
+                @foreach ($fileTypes as $fileType)
+                    <div class="form-group">
+                        <p>{{ $fileType->display_name }}:</p>
+                        <label class="radio-inline">
+                            <input class="fileTypeFilter" type="radio" name="{{ $fileType->id }}"
+                                   id="fileType{{ $fileType->id }}2"
+                                   value="2"> Used Service
+                        </label>
+                        <label class="radio-inline">
+                            <input class="fileTypeFilter" type="radio" name="{{ $fileType->id }}"
+                                   id="fileType{{ $fileType->id }}3"
+                                   value="3"> Never Used Service
+                        </label>
+                        <label class="radio-inline">
+                            <input class="fileTypeFilter" type="radio" name="{{ $fileType->id }}"
+                                   id="fileType{{ $fileType->id }}1"
+                                   value="1" checked> All
+                        </label>
+                    </div>
+                    <hr>
+                    @endforeach
+
+                            <!--
                 <div class="form-group">
                     <p>Temporary Accomodation:</p>
                     <label class="radio-inline">
@@ -107,6 +132,7 @@
                         <input type="radio" name="hbSwitchFilter" id="inlineRadio1" value="1" checked> All
                     </label>
                 </div>
+                -->
             </div>
         </div>
         <hr>
