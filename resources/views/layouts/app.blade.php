@@ -11,8 +11,8 @@
     <title>{{ config('app.name', 'Cost Calculator') }}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/{{env('APP_FAVICON','favicon.ico')}}" type="image/x-icon">
+    <link rel="icon" href="/{{env('APP_FAVICON','favicon.ico')}}" type="image/x-icon">
 
     <!-- Styles -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
