@@ -30,4 +30,5 @@
 <p>The tool also has a number of settings that a user can use to configure different aspects of the tools operation, and some logs that monitor activity as the tool is being used.</p>
 <p>Access to the tool is controlled by authentication against user accounts. Users need an email address and password in order to login to the tool. Access to the different elements of the tool is also controlled by setting permissions for each user account. So not every user will be able to see all the features of the tool.</p>
 <p>Full technical documentation for the tool is <a href="https://github.com/LBHounslow/cost-calc/wiki">available online</a>.</p>
+<p>The original Cost Calculator tool was built as part of a data innovation project by a multi-disciplinary team commissioned by the London Borough of Hounslow that was carried out between Spring 2016 and Spring 2017. The project was part funded by the Local Government Association and the Department for Communities and Local Government.</p>
 @stop
