@@ -19,6 +19,7 @@
                 <input type="text" class="input-sm form-control" name="end"/>
             </div>
         </div>
+        <hr>
         <div class="form-group">
             <h4>
                 Select Services:
@@ -49,6 +50,7 @@
 
         </div>
         <hr>
+
         <div>
             <a data-toggle="collapse" href="#collapseExample"
                aria-expanded="false" aria-controls="collapseExample" style="font-size: 14px;">
@@ -60,8 +62,45 @@
 
         <div class="collapse" id="collapseExample">
             <div class="well">
+
                 <div>
-                    <br>
+                    <p>
+                        The following filter can be used to filter clients based on whether they have ever received the
+                        a service for a specific need. Please note these filters are not affected by any date ranges.
+                        They simply show whether a client has ever had the need or not:
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <select multiple id="service-need-select" class="form-control multiselect">
+                        @foreach ($serviceNeeds as $serviceNeed)
+                            <option value="{{ $serviceNeed->need }}">
+                                {{ $serviceNeed->need }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="needFilter" id="inlineRadio1" value="1" checked> Any of the Needs
+                    </label>
+                    <span class="glyphicon glyphicon-info-sign tt" aria-hidden="true" data-toggle="tooltip"
+                          data-placement="right"
+                          title="Select “Any of the needs” if you want to look at clients who have any of the needs you’ve selected.">
+                    </span>
+                    <label class="radio-inline">
+                        <input type="radio" name="needFilter" id="inlineRadio2" value="2"> All of the Needs
+                    </label>
+                    <span class="glyphicon glyphicon-info-sign tt" aria-hidden="true" data-toggle="tooltip"
+                          data-placement="right"
+                          title="Select “All of the needs” if you want to look at clients who have all of the needs you have selected.">
+                    </span>
+
+                </div>
+                <hr>
+
+                <div>
                     <p>
                         The following filters can be used to filter clients based on whether they have ever received the
                         Service. Please note these filters are not affected by any date ranges. They simply show whether
@@ -91,48 +130,8 @@
                         </label>
                     </div>
                     <hr>
-                    @endforeach
+                @endforeach
 
-                            <!--
-                <div class="form-group">
-                    <p>Temporary Accomodation:</p>
-                    <label class="radio-inline">
-                        <input type="radio" name="tempFilter" id="inlineRadio2" value="2"> Used Service
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="tempFilter" id="inlineRadio3" value="3"> Never Used Service
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="tempFilter" id="inlineRadio1" value="1" checked> All
-                    </label>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <p>Troubled Families:</p>
-                    <label class="radio-inline">
-                        <input type="radio" name="troubledFilter" id="inlineRadio2" value="2"> Used Service
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="troubledFilter" id="inlineRadio3" value="3"> Never Used Service
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="troubledFilter" id="inlineRadio1" value="1" checked> All
-                    </label>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <p>Housing Benefit Switch:</p>
-                    <label class="radio-inline">
-                        <input type="radio" name="hbSwitchFilter" id="inlineRadio2" value="2"> Used Service
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="hbSwitchFilter" id="inlineRadio3" value="3"> Never Used Service
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="hbSwitchFilter" id="inlineRadio1" value="1" checked> All
-                    </label>
-                </div>
-                -->
             </div>
         </div>
         <hr>
@@ -240,6 +239,7 @@
                         </th>
                         <th data-field="service" data-sortable="true">Service</th>
                         <th data-field="service_type" data-sortable="true">Service Type</th>
+                        <th data-field="need" data-sortable="true">Need</th>
                         <th data-field="start_date" data-sortable="true">Start Date</th>
                         <th data-field="end_date" data-sortable="true">End Date</th>
                         <th data-formatter="formatSpend" data-field="unit_cost" data-sortable="true">Cost</th>

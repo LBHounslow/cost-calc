@@ -15,12 +15,14 @@ class ReportController extends Controller
     {
         $fileTypes = FileType::all();
         $serviceTypes = $this->getServiceTypes(null, true);
+        $serviceNeeds = $this->getServiceNeeds(null, true);
         $spendByClients = $this->getSpendByClient(null, true);
         $spendByServices = $this->getSpendByService(null, true);
 
         return View::make('reports/index', [
             'clientsTotalSpend' => json_encode($spendByClients),
             'serviceTypes' => $serviceTypes,
+            'serviceNeeds' => $serviceNeeds,
             'spendByServicesArr' => $spendByServices,
             'spendByServices' => $spendByServices,
             'fileTypes' => $fileTypes,
@@ -30,6 +32,11 @@ class ReportController extends Controller
     private function splitServiceTypes($services)
     {
         return "'" . str_replace(",", "','", rawurldecode($services)) . "'";
+    }
+
+    private function splitServiceNeeds($needs)
+    {
+        return "'" . str_replace(",", "','", rawurldecode($needs)) . "'";
     }
 
     private function createServiceFilterClause($services)
@@ -51,6 +58,53 @@ class ReportController extends Controller
             $i++;
         }
         return $query;
+    }
+
+    private function createServiceNeedClause($needs, $flag)
+    {
+        if ($flag === '2') {
+            $needsArr = explode(',', rawurldecode($needs));
+
+            $i = '1';
+            $inQuery = "
+            SELECT
+                id
+            FROM
+                Costs c ";
+
+            foreach ($needsArr as $need) {
+                if ($i === '1') {
+                    $op = 'WHERE';
+                } else {
+                    $op = 'AND';
+                }
+
+                $inQuery .= "$op id IN (SELECT id FROM Costs c WHERE c.need = '$need')";
+                $i++;
+            }
+        } else {
+            $needsArr = explode(',', rawurldecode($needs));
+            $i = '1';
+            $needsQuery = '';
+            foreach ($needsArr as $need) {
+                if ($i === '1') {
+                    $needsQuery .= "'$need'";
+                } else {
+                    $needsQuery .= "',$need'";
+                }
+                $i++;
+            }
+            $inQuery = "
+                SELECT
+                    id
+                FROM
+                    Costs c
+                WHERE
+                    c.need IN ($needsQuery) ";
+        }
+
+        $sql = " AND id IN ($inQuery)";
+        return $sql;
     }
 
     private function executeQuery($query)
@@ -118,11 +172,17 @@ class ReportController extends Controller
         if (isset($request) && $request->input('serviceType') && $request->input('serviceFilter') === '2') {
             $whereClause = $this->createServiceFilterClause($request->input('serviceType'));
         } elseif (isset($request) && $request->input('serviceType')) {
-            $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
+            $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ") ";
         } elseif ($allServices) {
             $whereClause = "WHERE 1=1 ";
         } else {
             $whereClause = "WHERE 1=2 ";
+        }
+
+
+        /* Service Need Filter */
+        if (isset($request) && $request->input('serviceNeed')) {
+            $whereClause .= $this->createServiceNeedClause($request->input('serviceNeed'), $request->input('needFilter'));
         }
 
         /* File Type Filter */
@@ -157,6 +217,11 @@ class ReportController extends Controller
             $whereClause = "WHERE 1=1 ";
         } else {
             $whereClause = "WHERE 1=2 ";
+        }
+
+        /* Service Need Filter */
+        if (isset($request) && $request->input('serviceNeed')) {
+            $whereClause .= $this->createServiceNeedClause($request->input('serviceNeed'), $request->input('needFilter'));
         }
 
         /* File Type Filter */
@@ -203,7 +268,7 @@ class ReportController extends Controller
             $end = '2016-04-01';
         }
 
-        $headerQuery = "SELECT id, service, service_type, start_date, frequency, convert(date,end_date) as 'end_date', CAST(unit_cost as decimal(10,2)) as 'unit_cost', CAST(report_cost as decimal(10,2)) as 'report_cost' ";
+        $headerQuery = "SELECT id, service, service_type, need, start_date, frequency, convert(date,end_date) as 'end_date', CAST(unit_cost as decimal(10,2)) as 'unit_cost', CAST(report_cost as decimal(10,2)) as 'report_cost' ";
         $footerQuery = "$whereClause AND id = " . $request->input('clientId') . " ORDER BY start_date;";
         $query = $this->buildQuery($headerQuery, $footerQuery, $start, $end);
 
@@ -216,6 +281,12 @@ class ReportController extends Controller
     public function getServiceTypes()
     {
         $result = DB::select(DB::raw("SELECT DISTINCT service, service_type FROM Costs ORDER BY service, service_type ASC;"));
+        return $result;
+    }
+
+    public function getServiceNeeds()
+    {
+        $result = DB::select(DB::raw("SELECT DISTINCT need FROM Costs WHERE need IS NOT NULL ORDER BY need ASC;"));
         return $result;
     }
 
@@ -235,6 +306,7 @@ class ReportController extends Controller
                         postcode,
                         service,
                         service_type,
+                        need,
                         frequency,
                         start_date,
                         end_date,
@@ -259,6 +331,7 @@ class ReportController extends Controller
                                 postcode,
                                 service,
                                 service_type,
+                                need,
                                 frequency,
                                 start_date,
                                 end_date,

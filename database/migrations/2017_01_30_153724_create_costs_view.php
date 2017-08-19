@@ -22,6 +22,7 @@ class CreateCostsView extends Migration
                 ,c.postcode
                 ,f.display_name as 'service'
                 ,h01.prop_type as 'service_type'
+                ,NULL as 'need'
                 ,'Weekly' as 'frequency'
                 ,h01.start_date
                 ,h01.end_date
@@ -44,6 +45,7 @@ class CreateCostsView extends Migration
                 ,c.postcode
                 ,f.display_name as 'service'
                 ,asc01.service_type as 'service_type'
+                ,asc01.primary_support_reason_category as 'need'
                 ,asc01.frequency as 'frequency'
                 ,start_date
                 ,end_date
@@ -68,6 +70,7 @@ class CreateCostsView extends Migration
                 ,c.postcode
                 ,f.display_name as 'service'
                 ,service_desc as 'service_type'
+                ,NULL as 'need'
                 ,gs.cost_frequency as 'frequency'
                 ,start_date
                 ,end_date
@@ -93,6 +96,7 @@ class CreateCostsView extends Migration
                 ,c.postcode
                 ,f.display_name as 'service'
                 ,'Housing Benefit Entitlement' as 'service_type'
+                ,NULL as 'need'
                 ,'Weekly' as 'frequency'
                 ,start_date
                 ,end_date

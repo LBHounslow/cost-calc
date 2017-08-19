@@ -12,10 +12,9 @@ var Spend = {
         /* get the filter values */
         dateRange = this.getDateRange();
         serviceTypes = this.getServiceTypes();
-        //tempFilter = this.getTempAccomFilter();
-        //troubledFilter = this.getTroubledFilter();
-        //hbSwitchFilter = this.getHbSwitchFilter();
         serviceFilter = this.getServiceFilter();
+        serviceNeeds = this.getServiceNeeds();
+        needFilter = this.getNeedFilter();
         fileTypeFilter = this.getFileTypeFilter();
 
         /* save them to object for easy retrieval */
@@ -23,10 +22,9 @@ var Spend = {
             startDate: moment(dateRange.startDate).format('YYYY-MM-DD'),
             endDate: moment(dateRange.endDate).format('YYYY-MM-DD'),
             serviceTypes: encodeURI(serviceTypes),
-            //tempFilter: tempFilter,
-            //troubledFilter: troubledFilter,
-            //hbSwitchFilter: hbSwitchFilter,
             serviceFilter: serviceFilter,
+            serviceNeeds: encodeURI(serviceNeeds),
+            needFilter: needFilter,
             fileTypeFilter: fileTypeFilter,
         };
     },
@@ -34,13 +32,12 @@ var Spend = {
     getSpendByClients: function (callback) {
 
         var params = [
-            //{tempFilter: this.filter.tempFilter},
-            //{troubledFilter: this.filter.troubledFilter},
-            //{hbSwitchFilter: this.filter.hbSwitchFilter},
             {serviceFilter: this.filter.serviceFilter},
+            {needFilter: this.filter.needFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
+            {serviceNeed: this.filter.serviceNeeds},
             {fileTypeFilter: JSON.stringify(this.filter.fileTypeFilter)},
         ];
 
@@ -68,13 +65,12 @@ var Spend = {
     getSpendByServices: function (callback) {
 
         var params = [
-            //{tempFilter: this.filter.tempFilter},
-            //{troubledFilter: this.filter.troubledFilter},
-            //{hbSwitchFilter: this.filter.hbSwitchFilter},
             {serviceFilter: this.filter.serviceFilter},
+            {needFilter: this.filter.needFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
+            {serviceNeed: this.filter.serviceNeeds},
             {fileTypeFilter: JSON.stringify(this.filter.fileTypeFilter)},
         ];
 
@@ -102,13 +98,12 @@ var Spend = {
 
         var params = [
             {clientId: clientId},
-            //{tempFilter: this.filter.tempFilter},
-            //{troubledFilter: this.filter.troubledFilter},
-            //{hbSwitchFilter: this.filter.hbSwitchFilter},
             {serviceFilter: this.filter.serviceFilter},
+            {needFilter: this.filter.needFilter},
             {start: this.filter.startDate},
             {end: this.filter.endDate},
             {serviceType: this.filter.serviceTypes},
+            {serviceNeed: this.filter.serviceNeeds},
             {fileTypeFilter: JSON.stringify(this.filter.fileTypeFilter)},
         ];
 
@@ -127,7 +122,7 @@ var Spend = {
             success: function (response) {
                 that.clientSpend = response;
                 $('#client-spend-table').bootstrapTable('load', response);
-                $("#client-spend-table tr td:nth-child(4), #client-spend-table tr td:nth-child(5)").each(function () {
+                $("#client-spend-table tr td:nth-child(5), #client-spend-table tr td:nth-child(6)").each(function () {
                     if ($(this).text() == '-') {
 
                     } else {
@@ -155,6 +150,10 @@ var Spend = {
         return $('#service-type-select').val();
     },
 
+    getServiceNeeds: function () {
+        return $('#service-need-select').val();
+    },
+
     getTempAccomFilter: function () {
         return $('input[name=tempFilter]:checked').val();
     },
@@ -169,6 +168,10 @@ var Spend = {
 
     getServiceFilter: function () {
         return $('input[name=serviceFilter]:checked').val();
+    },
+
+    getNeedFilter: function () {
+        return $('input[name=needFilter]:checked').val();
     },
 
     getFileTypeFilter: function () {
