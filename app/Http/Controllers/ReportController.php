@@ -90,7 +90,7 @@ class ReportController extends Controller
                 if ($i === '1') {
                     $needsQuery .= "'$need'";
                 } else {
-                    $needsQuery .= "',$need'";
+                    $needsQuery .= ",'$need'";
                 }
                 $i++;
             }
