@@ -60,6 +60,20 @@ class ReportController extends Controller
         return $query;
     }
 
+    private function createAgeRangeClause($range)
+    {
+        $ageRange = \GuzzleHttp\json_decode($range);
+
+        $min = $ageRange[0];
+        $max = $ageRange[1];
+
+        $inQuery = "select id from clients where dob >= DATEADD(yy,-$max, getdate()) and dob <=  DATEADD(yy,-$min, getdate())";
+
+        $sql = " AND id IN ($inQuery)";
+        return $sql;
+    }
+
+
     private function createServiceNeedClause($needs, $flag)
     {
         if ($flag === '2') {
@@ -179,6 +193,10 @@ class ReportController extends Controller
             $whereClause = "WHERE 1=2 ";
         }
 
+        /* Age Range Filter */
+        if (isset($request) && $request->input('ageRangeFilter')) {
+            $whereClause .= $this->createAgeRangeClause($request->input('ageRangeFilter'));
+        }
 
         /* Service Need Filter */
         if (isset($request) && $request->input('serviceNeed')) {
@@ -218,6 +236,12 @@ class ReportController extends Controller
         } else {
             $whereClause = "WHERE 1=2 ";
         }
+
+        /* Age Range Filter */
+        if (isset($request) && $request->input('ageRangeFilter')) {
+            $whereClause .= $this->createAgeRangeClause($request->input('ageRangeFilter'));
+        }
+
 
         /* Service Need Filter */
         if (isset($request) && $request->input('serviceNeed')) {

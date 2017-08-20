@@ -132,6 +132,19 @@
                     <hr>
                 @endforeach
 
+                <div>
+                    <p>
+                        The following filtes can be used to filter clients based on their current age:
+                    </p>
+                    <br>
+                </div>
+
+
+                <div>
+                    <div id="slider"></div>
+                </div>
+
+
             </div>
         </div>
         <hr>
@@ -266,6 +279,7 @@
           href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.css"/>
 @endsection
 
 @section('footerScripts')
@@ -277,7 +291,33 @@
     <script src="/js/tableExport.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.js"></script>
 
+    <!-- Age Picker -->
+    <script type="text/javascript">
+        var slider = document.getElementById('slider');
+
+        slider.style.margin = '50px auto';
+
+        noUiSlider.create(slider, {
+            start: [20, 80],
+            connect: true,
+            tooltips: true,
+            range: {
+                'min': 18,
+                'max': 125
+            },
+            pips: { // Show a scale with the slider
+                mode: 'steps',
+                stepped: true,
+                density: 4
+            },
+            format: wNumb({
+                decimals: 0
+            }),
+        });
+    </script>
 
     <!-- Multi Select plugin && Date Picker -->
     <script type="text/javascript">

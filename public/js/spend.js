@@ -16,6 +16,7 @@ var Spend = {
         serviceNeeds = this.getServiceNeeds();
         needFilter = this.getNeedFilter();
         fileTypeFilter = this.getFileTypeFilter();
+        ageRangeFilter = this.getAgeRangeFilter();
 
         /* save them to object for easy retrieval */
         this.filter = {
@@ -26,6 +27,7 @@ var Spend = {
             serviceNeeds: encodeURI(serviceNeeds),
             needFilter: needFilter,
             fileTypeFilter: fileTypeFilter,
+            ageRangeFilter: ageRangeFilter,
         };
     },
 
@@ -39,13 +41,13 @@ var Spend = {
             {serviceType: this.filter.serviceTypes},
             {serviceNeed: this.filter.serviceNeeds},
             {fileTypeFilter: JSON.stringify(this.filter.fileTypeFilter)},
+            {ageRangeFilter: JSON.stringify(this.filter.ageRangeFilter)},
         ];
 
         var baseUrl = "/reports/spend-by-client";
         var url = this.generateUrlWithGetParams(baseUrl, params);
 
         var that = this;
-
         $.ajax({
             type: "GET",
             url: url,
@@ -72,6 +74,7 @@ var Spend = {
             {serviceType: this.filter.serviceTypes},
             {serviceNeed: this.filter.serviceNeeds},
             {fileTypeFilter: JSON.stringify(this.filter.fileTypeFilter)},
+            {ageRangeFilter: JSON.stringify(this.filter.ageRangeFilter)},
         ];
 
         var baseUrl = "/reports/spend-by-service";
@@ -182,6 +185,11 @@ var Spend = {
             }
         }).get();
     },
+
+    getAgeRangeFilter: function () {
+        return slider.noUiSlider.get();
+    },
+
 
     generateUrlWithGetParams: function (baseUrl, params) {
 
