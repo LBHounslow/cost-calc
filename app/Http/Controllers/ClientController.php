@@ -51,8 +51,9 @@ class ClientController extends Controller
     {
         $client = Clients::find($id);
         $details = $this->getClientDetails($id);
+        $clientSpend = json_encode($this->getClientSpend($id));
 
-        return View::make('clients/index', ['client' => $client, 'details' => $details]);
+        return View::make('clients/index', ['client' => $client, 'details' => $details, 'clientSpend' => $clientSpend]);
     }
 
     /**
@@ -87,6 +88,12 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function getClientSpend($id)
+    {
+        $query = "SELECT service, service_type, need, start_date, end_date, frequency, unit_cost FROM Costs where id = $id ORDER BY start_date ASC;";
+        return $this->executeQuery($query);
     }
 
     private function getClientDetails($id)

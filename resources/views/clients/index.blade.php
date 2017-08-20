@@ -127,15 +127,68 @@
             </li>
         </ul>
 
+        <hr>
+
+        <table class="table" id="client-spend-table"
+               data-toggle="table"
+               data-show-export="true"
+               data-search="true"
+               data-show-refresh="true"
+               data-pagination="true"
+               data-show-multi-sort="true"
+               data-show-columns="true">
+            <thead>
+            <tr>
+                <th data-field="service" data-sortable="true">Service</th>
+                <th data-field="service_type" data-sortable="true">Service Type</th>
+                <th data-field="need" data-sortable="true">Need</th>
+                <th data-field="start_date" data-sortable="true">Start Date</th>
+                <th data-field="end_date" data-sortable="true">End Date</th>
+                <th data-field="frequency" data-sortable="true">Cost Frequency</th>
+                <th data-formatter="formatSpend" data-field="unit_cost" data-sortable="true">Unit Cost</th>
+            </tr>
+            </thead>
+        </table>
+
+
+
     @endif
 
 @stop
 
+@section('headerScripts')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+@endsection
 
 @section('footerScripts')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/extensions/export/bootstrap-table-export.min.js"></script>
     <script>
         $("#clientForm").submit(function (event) {
             $(this).attr("action", "/client/" + $("#clientId").val());
         });
+
+        /* Create Object */
+                <?php if (isset($clientSpend)) {
+                    $clientSpendVar = $clientSpend;
+                } else {
+                    $clientSpendVar = "''";
+                } ?>
+
+
+        var clientSpend = <?php echo $clientSpendVar; ?>;
+
+        $('#client-spend-table').bootstrapTable({
+            data: clientSpend,
+            exportDataType: 'all',
+        });
+
+        function formatSpend(value, row, index) {
+            return '£' + formatNumber(value);
+        }
+
+        function formatNumber(n) {
+            return Number(n).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+        }
     </script>
 @stop
