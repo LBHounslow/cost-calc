@@ -301,7 +301,7 @@
         slider.style.margin = '50px auto';
 
         noUiSlider.create(slider, {
-            start: [20, 80],
+            start: [18, 125],
             connect: true,
             tooltips: true,
             range: {
