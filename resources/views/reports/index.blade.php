@@ -192,7 +192,7 @@
                        data-toggle="table"
                        data-show-export="true"
                        data-search="true"
-                       data-show-refresh="true"
+
                        data-pagination="true"
                        data-show-multi-sort="true"
                        data-show-columns="true">
@@ -215,7 +215,7 @@
                        data-toggle="table"
                        data-show-export="true"
                        data-search="true"
-                       data-show-refresh="true"
+
                        data-pagination="true"
                        data-show-multi-sort="true"
                        data-show-columns="true">
@@ -241,7 +241,7 @@
                        data-toggle="table"
                        data-show-export="true"
                        data-search="true"
-                       data-show-refresh="true"
+
                        data-pagination="true"
                        data-show-multi-sort="true"
                        data-show-columns="true">
