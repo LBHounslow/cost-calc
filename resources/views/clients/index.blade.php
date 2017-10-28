@@ -160,6 +160,7 @@
 @endsection
 
 @section('footerScripts')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/extensions/export/bootstrap-table-export.min.js"></script>
     <script src="/js/tableExport.js"></script>
@@ -181,6 +182,15 @@
         $('#client-spend-table').bootstrapTable({
             data: clientSpend,
             exportDataType: 'all',
+        });
+
+        $("#client-spend-table tr td:nth-child(4), #client-spend-table tr td:nth-child(5)").each(function () {
+            if ($(this).text() == '-') {
+
+            } else {
+                var d = moment($(this).text()).format("DD/MM/YYYY");
+                $(this).html(d);
+            }
         });
 
         function formatSpend(value, row, index) {
