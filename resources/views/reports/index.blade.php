@@ -134,7 +134,7 @@
 
                 <div>
                     <p>
-                        The following filtes can be used to filter clients based on their current age:
+                        The following filter can be used to filter clients based on their current age:
                     </p>
                     <br>
                 </div>
