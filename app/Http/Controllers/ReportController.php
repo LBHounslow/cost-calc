@@ -39,7 +39,7 @@ class ReportController extends Controller
         return "'" . str_replace(",", "','", rawurldecode($needs)) . "'";
     }
 
-    private function createServiceFilterClause($services)
+    private function createServiceFilterClause($services, $date)
     {
         $servicesArr = explode(',', rawurldecode($services));
 
@@ -54,7 +54,7 @@ class ReportController extends Controller
                 $op = 'AND';
             }
 
-            $query .= "$op id IN (SELECT id FROM Costs WHERE CONCAT(Costs.service, ' - ', Costs.service_type) = '$service' AND Costs.id = SubQuery.id) ";
+            $query .= "$op id IN (SELECT id FROM Costs WHERE CONCAT(Costs.service, ' - ', Costs.service_type) = '$service' AND Costs.id = SubQuery.id AND Costs.end_date < '" . $date['end'] . "' AND Costs.start_date >= '" . $date['start'] . "') ";
             $i++;
         }
         return $query;
@@ -184,7 +184,9 @@ class ReportController extends Controller
 
         /* Service Type Filter */
         if (isset($request) && $request->input('serviceType') && $request->input('serviceFilter') === '2') {
-            $whereClause = $this->createServiceFilterClause($request->input('serviceType'));
+            $date['start'] = $request->input('start');
+            $date['end'] = $request->input('end');
+            $whereClause = $this->createServiceFilterClause($request->input('serviceType'), $date);
         } elseif (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ") ";
         } elseif ($allServices) {
@@ -228,7 +230,9 @@ class ReportController extends Controller
     {
         /* Service Type Filter */
         if (isset($request) && $request->input('serviceType') && $request->input('serviceFilter') === '2') {
-            $whereClause = $this->createServiceFilterClause($request->input('serviceType'));
+            $date['start'] = $request->input('start');
+            $date['end'] = $request->input('end');
+            $whereClause = $this->createServiceFilterClause($request->input('serviceType'), $date);
         } elseif (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } elseif ($allServices) {
@@ -274,7 +278,9 @@ class ReportController extends Controller
     {
         /* Service Type Filter */
         if (isset($request) && $request->input('serviceType') && $request->input('serviceFilter') === '2') {
-            $whereClause = $this->createServiceFilterClause($request->input('serviceType'));
+            $date['start'] = $request->input('start');
+            $date['end'] = $request->input('end');
+            $whereClause = $this->createServiceFilterClause($request->input('serviceType'), $date);
         } elseif (isset($request) && $request->input('serviceType')) {
             $whereClause = "WHERE CONCAT(service, ' - ', service_type) IN (" . $this->splitServiceTypes($request->input('serviceType')) . ")";
         } elseif ($allServices) {
