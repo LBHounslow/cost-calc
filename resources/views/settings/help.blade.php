@@ -7,7 +7,7 @@
 @section('content')
     <p>The Cost Calculator is a web-based intelligence tool designed to support local authorities in analysing the use
         of the services they provide. It uses the cost of service provision as the primary measure of service use.</p>
-    <p><a href="/userguide-v2.pdf">Download the detailed User Guide</a></p>
+    <p><a href="/userguide-v3.pdf">Download the detailed User Guide</a></p>
     <p>The tool has three main features:</p>
     <ul>
         <li>The ability to upload cost data</li>
